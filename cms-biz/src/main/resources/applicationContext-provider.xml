@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <!--应用名称-->
+    <dubbo:application name="${cms.dubbo.name}"/>
+
+    <!-- dubbo注册地址 -->
+    <dubbo:registry address="${cms.dubbo.registry.address}"/>
+
+    <!-- dubbo注册端口 -->
+    <dubbo:protocol name="dubbo" port="${cms.dubbo.protocol.port}"/>
+
+    <!-- 监听注册 -->
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- dubbo对外开放接口 -->
+    <dubbo:service interface="com.kangyonggan.archetype.cms.service.CmsDemoService"
+                   ref="cmsDemoService" version="${cms.dubbo.cms.version}" retries="0"
+                   timeout="${cms.dubbo.timeout}"/>
+
+</beans>

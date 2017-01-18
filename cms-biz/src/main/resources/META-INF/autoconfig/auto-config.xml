@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <!-- dubbo -->
+        <property name="cms.dubbo.name" description="项目名字" defaultValue="cms"/>
+        <property name="cms.dubbo.registry.address" description="dubbo注册地址"
+                  defaultValue="zookeeper://127.0.0.1:2181?backup=127.0.0.1:2182,127.0.0.1:2183"/>
+        <property name="cms.dubbo.protocol.port" description="dubbo注册端口" defaultValue="-1"/>
+        <property name="cms.dubbo.timeout" description="dubbo超时时间" defaultValue="10000"/>
+        <property name="cms.dubbo.cms.version" description="api提供接口的版本" defaultValue="1.0.0"/>
+
+        <!-- redis -->
+        <property name="cms.redis.maxTotal" description="redis最大连接数" defaultValue="1000"/>
+        <property name="cms.redis.minIdle" description="redis最小等待数" defaultValue="50"/>
+        <property name="cms.redis.maxIdle" description="redis最大等待数" defaultValue="100"/>
+        <property name="cms.redis.testOnBorrow" description="redis测试支持" defaultValue="true"/>
+        <property name="cms.redis.host" description="redis主机ip" defaultValue="127.0.0.1"/>
+        <property name="cms.redis.port" description="redis主机端口" defaultValue="6379"/>
+        <property name="cms.redis.password" description="redis密码" defaultValue="123456"/>
+
+        <!--jdbc-->
+        <property name="cms.jdbc.driver" description="jdbc驱动" defaultValue="com.mysql.jdbc.Driver"/>
+        <property name="cms.jdbc.url" description="jdbc地址" defaultValue="jdbc:mysql://127.0.0.1:3306/cms"/>
+        <property name="cms.jdbc.username" description="jdbc用户名" defaultValue="root"/>
+        <property name="cms.jdbc.password" description="jdbc密码" defaultValue="123456"/>
+
+        <!-- log4j2 -->
+        <property name="cms.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/cms"/>
+
+        <property name="cms.slow.method.time" description="慢方法时间(秒)" defaultValue="5"/>
+        <property name="cms.slow.interface.time" description="慢接口时间(秒)" defaultValue="5"/>
+        <property name="cms.redis.prefix.key" description="redis键的前缀" defaultValue="cms"/>
+        <property name="cms.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
+    </group>
+    <script>
+        <generate template="app.properties"/>
+        <generate template="applicationContext-datasource.xml"/>
+        <generate template="applicationContext-redis.xml"/>
+        <generate template="applicationContext-provider.xml"/>
+        <generate template="log4j2.xml"/>
+    </script>
+</config>
