@@ -7,10 +7,14 @@ import com.kangyonggan.archetype.cms.biz.util.StringUtil;
 import com.kangyonggan.archetype.cms.model.annotation.CacheDelete;
 import com.kangyonggan.archetype.cms.model.annotation.CacheDeleteAll;
 import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
@@ -23,9 +27,11 @@ import java.util.regex.Pattern;
  * @since 2016/11/30
  */
 @Log4j2
+@Component
+@Aspect
 public class CacheAop {
 
-    @Setter
+    @Autowired
     private RedisService redisService;
 
     /**
@@ -38,11 +44,16 @@ public class CacheAop {
      */
     private boolean isOpenCache = PropertiesUtil.getProperties("cache.open").equals("Y");
 
+    @Pointcut("execution(* com.kangyonggan.archetype.cms.biz..*.*(..))")
+    public void pointcut() {
+    }
+
     /**
      * @param joinPoint
      * @return
      * @throws Throwable
      */
+    @Around("pointcut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         Object args[] = joinPoint.getArgs();
 

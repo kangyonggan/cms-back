@@ -35,8 +35,8 @@
         <spring.version>4.2.6.RELEASE</spring.version>
 
         <!--aop-->
-        <aspectjrt.version>1.6.9</aspectjrt.version>
-        <aspectjweaver.version>1.6.1</aspectjweaver.version>
+        <aspectjrt.version>1.8.9</aspectjrt.version>
+        <aspectjweaver.version>1.8.9</aspectjweaver.version>
 
         <!--Mybatis-->
         <mybatis.version>3.3.1</mybatis.version>

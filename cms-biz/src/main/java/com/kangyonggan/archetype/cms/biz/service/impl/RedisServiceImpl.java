@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @author kangyonggan
  * @since 2016/12/2
  */
-@Service("redisService")
+@Service
 public class RedisServiceImpl implements RedisService {
 
     @Autowired

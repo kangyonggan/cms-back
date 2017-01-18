@@ -41,33 +41,21 @@
         </tx:attributes>
     </tx:advice>
 
-    <bean id="logAop" class="com.kangyonggan.archetype.cms.biz.aop.LogAop"></bean>
-
-    <bean id="cacheAop" class="com.kangyonggan.archetype.cms.biz.aop.CacheAop">
-        <property name="redisService" ref="redisService"></property>
-    </bean>
+    <!-- 自动扫描被@Aspect注解的bean-->
+    <aop:aspectj-autoproxy/>
 
     <!-- 配置AOP切面 -->
     <aop:config>
         <!--切点，用于事务-->
-        <aop:pointcut id="transactionPointcut" expression="execution(* com.kangyonggan.archetype.cms.biz.service.impl..*.*(..))"/>
-        <!--切点，用于日志和缓存-->
-        <aop:pointcut id="bizPointcut" expression="execution(* com.kangyonggan.archetype.cms.biz..*.*(..))"/>
+        <aop:pointcut id="transactionPointcut"
+                      expression="execution(* com.kangyonggan.archetype.cms.biz.service.impl..*.*(..))"/>
         <!--切点，用于对外接口-->
         <aop:pointcut id="servicePointcut" expression="execution(* com.kangyonggan.archetype.cms.biz.impl..*.*(..))"/>
 
         <!--事物切面-->
-        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
-        <!--日志切面-->
-        <aop:aspect id="logAspect" ref="logAop">
-            <aop:around method="around" pointcut-ref="bizPointcut"/>
-        </aop:aspect>
-        <!--缓存切面-->
-        <!--<aop:aspect id="cacheAspect" ref="cacheAop">-->
-            <!--<aop:around method="around" pointcut-ref="bizPointcut"/>-->
-        <!--</aop:aspect>-->
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" order="2"/>
         <!--对外接口切面-->
-        <aop:aspect id="serviceAspect" ref="serviceAop">
+        <aop:aspect id="serviceAspect" ref="serviceAop" order="1">
             <aop:around method="around" pointcut-ref="servicePointcut"/>
         </aop:aspect>
     </aop:config>
