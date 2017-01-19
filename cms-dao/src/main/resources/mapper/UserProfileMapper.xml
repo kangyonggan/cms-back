@@ -6,10 +6,10 @@
           WARNING - @mbggenerated
         -->
         <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="medium_avatar" property="mediumAvatar" jdbcType="VARCHAR"/>
         <result column="large_avatar" property="largeAvatar" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="TINYINT"/>
-        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
         <result column="web_site" property="webSite" jdbcType="VARCHAR"/>

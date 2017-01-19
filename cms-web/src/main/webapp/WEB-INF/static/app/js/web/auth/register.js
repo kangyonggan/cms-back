@@ -1,29 +1,41 @@
 $(function () {
-    var $form = $('#login-form');
-    var $btn = $("#login");
-
-    $("#reset").click(function () {
-        $form.find("input").val("");
-        return false;
-    });
+    var $form = $('#register-form');
+    var $btn = $("#submit");
 
     $form.validate({
         rules: {
             username: {
                 required: true,
-                rangelength: [5, 30]
+                isUsername: true,
+                remote: {
+                    url: "/validate/user",
+                    type: 'post',
+                    data: {
+                        'username': function () {
+                            return $('#username').val()
+                        }
+                    }
+                }
             },
             password: {
                 required: true,
                 isPassword: true
             },
+            rePassword: {
+                required: true,
+                equalTo: "#password"
+            },
+            fullname: {
+                required: true,
+                isFullname: true
+            },
             captcha: {
                 required: true,
                 isCaptcha: true
+            },
+            agree: {
+                required: true
             }
-        },
-        messages: {
-            username: "请输入5至20位的用户名、手机号或者邮箱"
         },
         submitHandler: function () {
             $btn.button('loading');

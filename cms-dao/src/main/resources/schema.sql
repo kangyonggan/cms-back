@@ -18,8 +18,10 @@ CREATE TABLE user
   COMMENT '主键, 自增',
   username     VARCHAR(20)                           NOT NULL
   COMMENT '用户名',
-  email        VARCHAR(64)                           NOT NULL
+  email        VARCHAR(64)                           NOT NULL                    DEFAULT ''
   COMMENT '邮箱',
+  mobile       VARCHAR(20)                           NOT NULL                    DEFAULT ''
+  COMMENT '手机号',
   password     VARCHAR(64)                           NOT NULL
   COMMENT '密码',
   salt         VARCHAR(64)                           NOT NULL
@@ -42,8 +44,6 @@ CREATE INDEX create_ix
   ON user (created_time);
 CREATE UNIQUE INDEX username_UNIQUE
   ON user (username);
-CREATE UNIQUE INDEX email_UNIQUE
-  ON user (email);
 
 -- ----------------------------
 --  Table structure for user_profile
@@ -53,48 +53,50 @@ IF EXISTS user_profile;
 
 CREATE TABLE user_profile
 (
-  id            BIGINT(20) PRIMARY KEY NOT NULL
+  id            BIGINT(20) PRIMARY KEY AUTO_INCREMENT NOT NULL
   COMMENT '主键, 自增',
-  medium_avatar VARCHAR(255)           NOT NULL                    DEFAULT ''
+  username      VARCHAR(20)                           NOT NULL
+  COMMENT '用户名',
+  medium_avatar VARCHAR(255)                          NOT NULL                    DEFAULT ''
   COMMENT '中头像',
-  large_avatar  VARCHAR(255)           NOT NULL                    DEFAULT ''
+  large_avatar  VARCHAR(255)                          NOT NULL                    DEFAULT ''
   COMMENT '大头像',
-  sex           TINYINT                NOT NULL                    DEFAULT 0
+  sex           TINYINT                               NOT NULL                    DEFAULT 0
   COMMENT '性别:{0:男, 1:女}',
-  mobile        VARCHAR(20)            NOT NULL                    DEFAULT ''
-  COMMENT '手机号',
-  phone         VARCHAR(32)            NOT NULL                    DEFAULT ''
+  phone         VARCHAR(32)                           NOT NULL                    DEFAULT ''
   COMMENT '座机号',
-  id_card       VARCHAR(32)            NOT NULL                    DEFAULT ''
+  id_card       VARCHAR(32)                           NOT NULL                    DEFAULT ''
   COMMENT '身份证',
-  web_site      VARCHAR(64)            NOT NULL                    DEFAULT ''
+  web_site      VARCHAR(64)                           NOT NULL                    DEFAULT ''
   COMMENT '个人网站',
-  country_code  VARCHAR(16)            NOT NULL                    DEFAULT '000'
+  country_code  VARCHAR(16)                           NOT NULL                    DEFAULT '000'
   COMMENT '国家代码',
-  country_name  VARCHAR(32)            NOT NULL                    DEFAULT '中国'
+  country_name  VARCHAR(32)                           NOT NULL                    DEFAULT '中国'
   COMMENT '国家名称',
-  city_code     VARCHAR(16)            NOT NULL                    DEFAULT ''
+  city_code     VARCHAR(16)                           NOT NULL                    DEFAULT ''
   COMMENT '城市代码',
-  city_name     VARCHAR(32)            NOT NULL                    DEFAULT ''
+  city_name     VARCHAR(32)                           NOT NULL                    DEFAULT ''
   COMMENT '城市名称',
-  district_code VARCHAR(16)            NOT NULL                    DEFAULT ''
+  district_code VARCHAR(16)                           NOT NULL                    DEFAULT ''
   COMMENT '地区代码',
-  district_name VARCHAR(32)            NOT NULL                    DEFAULT ''
+  district_name VARCHAR(32)                           NOT NULL                    DEFAULT ''
   COMMENT '地区名称',
-  address       VARCHAR(128)           NOT NULL                    DEFAULT ''
+  address       VARCHAR(128)                          NOT NULL                    DEFAULT ''
   COMMENT '详细地址',
-  remarks       VARCHAR(512)           NOT NULL                    DEFAULT ''
+  remarks       VARCHAR(512)                          NOT NULL                    DEFAULT ''
   COMMENT '备注',
-  is_deleted    TINYINT                NOT NULL                    DEFAULT 0
+  is_deleted    TINYINT                               NOT NULL                    DEFAULT 0
   COMMENT '逻辑删除:{0:未删除, 1:已删除}',
-  created_time  TIMESTAMP              NOT NULL                    DEFAULT CURRENT_TIMESTAMP
+  created_time  TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP
   COMMENT '创建时间',
-  updated_time  TIMESTAMP              NOT NULL                    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  updated_time  TIMESTAMP                             NOT NULL                    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   COMMENT '更新时间'
 )
   COMMENT '用户信息表';
 CREATE UNIQUE INDEX id_UNIQUE
   ON user_profile (id);
+CREATE UNIQUE INDEX username_UNIQUE
+  ON user_profile (username);
 
 -- ----------------------------
 --  Table structure for role
@@ -239,17 +241,18 @@ CREATE INDEX sort_ix
 --  data for user
 -- ----------------------------
 INSERT INTO user
-(id, username, email, password, salt, fullname)
+(username, email, mobile, password, salt, fullname)
 VALUES
-  (1, 'admin', 'kangyonggan@gmail.com', '9606b0029ba4a8c9369f288cced0dc465eb5eabd', '3685072edcf8aad8', '管理员');
+  ('admin', 'kangyonggan@gmail.com', '15121149571', '9606b0029ba4a8c9369f288cced0dc465eb5eabd', '3685072edcf8aad8',
+   '管理员');
 
 -- ----------------------------
 --  data for user_profile
 -- ----------------------------
 INSERT INTO user_profile
-(id, medium_avatar, large_avatar, sex, mobile, phone, id_card, web_site, remarks)
+(username, phone, id_card, web_site)
 VALUES
-  (1, '', '', 0, '15121149571', '021-63898580', '340321199112273095', 'http://kangyonggan.com', '');
+  ('admin', '021-63898580', '340321199112273095', 'http://kangyonggan.com');
 
 -- ----------------------------
 --  data for role

@@ -8,6 +8,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="salt" property="salt" jdbcType="VARCHAR"/>
         <result column="fullname" property="fullname" jdbcType="VARCHAR"/>
@@ -16,4 +17,12 @@
         <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
         <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <insert id="insertUserRoles">
+        INSERT INTO user_role (username, role_code)
+        VALUES
+        <foreach collection="roleCodes" item="roleCode" separator=",">
+            (#{username}, #{roleCode})
+        </foreach>
+    </insert>
 </mapper>

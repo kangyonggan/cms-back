@@ -13,10 +13,10 @@
 
             <form id="login-form" action="${ctx}/login" method="post" novalidate="novalidate">
                 <div>
-                    <label for="username">用户名</label>
+                    <label for="username">用户名<small>/手机号/邮箱</small></label>
                     <div class="input-icon input-icon-right">
                         <input value="admin" type="text" name="username" class="form-control"
-                               placeholder="用户名:5至20位以字母开头的小写字母和数字的组合">
+                               placeholder="请输入用户名、手机号或者邮箱"/>
                         <i class="ace-icon fa fa-user"></i>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="space-14"></div>
 
                 <div class="clearfix">
-                    <button type="reset" class="width-30 pull-left btn btn-sm">
+                    <button id="reset" type="reset" class="width-30 pull-left btn btn-sm">
                         <i class="ace-icon fa fa-refresh"></i>
                         重置
                     </button>
@@ -66,7 +66,7 @@
                 </a>
             </div>
             <div>
-                <a href="javascript:" class="user-signup-link">
+                <a href="#register" class="user-signup-link">
                     注册
                     <i class="ace-icon fa fa-arrow-right"></i>
                 </a>

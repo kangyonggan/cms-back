@@ -16,6 +16,11 @@ public class UserProfile implements Serializable {
     private Long id;
 
     /**
+     * 用户名
+     */
+    private String username;
+
+    /**
      * 中头像
      */
     @Column(name = "medium_avatar")
@@ -31,11 +36,6 @@ public class UserProfile implements Serializable {
      * 性别:{0:男, 1:女}
      */
     private Byte sex;
-
-    /**
-     * 手机号
-     */
-    private String mobile;
 
     /**
      * 座机号

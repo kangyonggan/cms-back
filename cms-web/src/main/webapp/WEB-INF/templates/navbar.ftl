@@ -70,16 +70,16 @@
             </#if>
         </@shiro.user>
 
-        <@shiro.guest>
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#login">登录</a>
-                </li>
+        <#--<@shiro.guest>-->
+            <#--<ul class="nav navbar-nav">-->
+                <#--<li>-->
+                    <#--<a href="#login">登录</a>-->
+                <#--</li>-->
                 <#--<li>-->
                     <#--<a href="#register">注册</a>-->
                 <#--</li>-->
-            </ul>
-        </@shiro.guest>
+            <#--</ul>-->
+        <#--</@shiro.guest>-->
         </div>
     </div>
 </div>
