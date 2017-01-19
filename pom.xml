@@ -79,6 +79,7 @@
         <jedis.version>2.4.2</jedis.version>
 
         <!--main-->
+        <java-mail.version>1.4.7</java-mail.version>
         <junit.version>4.11</junit.version>
         <fastjson.version>1.2.8</fastjson.version>
         <persistence-api.version>1.0.2</persistence-api.version>
@@ -420,6 +421,11 @@
             </dependency>
 
             <!--main-->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${java-mail.version}</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

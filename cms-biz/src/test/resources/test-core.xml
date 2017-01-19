@@ -16,4 +16,10 @@
     <import resource="applicationContext-pool.xml"/>
     <!--redis缓存配置-->
     <import resource="applicationContext-redis.xml"/>
+    <!--shiro权限配置-->
+    <import resource="applicationContext-shiro.xml"/>
+    <!--Freemarker模板-->
+    <import resource="applicationContext-freemarker.xml"/>
+    <!--邮件-->
+    <import resource="applicationContext-mail.xml"/>
 </beans>

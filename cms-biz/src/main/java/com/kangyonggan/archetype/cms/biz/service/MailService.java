@@ -16,4 +16,12 @@ public interface MailService {
      */
     void sendResetMail(User user, String callbackUrl);
 
+    /**
+     * 发送邮件
+     *
+     * @param to
+     * @param text
+     * @param isHtml
+     */
+    void send(String to, String text, boolean isHtml);
 }

@@ -18,5 +18,7 @@
     <import resource="applicationContext-shiro.xml"/>
     <!--Freemarker模板-->
     <import resource="applicationContext-freemarker.xml"/>
+    <!--邮件-->
+    <import resource="applicationContext-mail.xml"/>
 
 </beans>
