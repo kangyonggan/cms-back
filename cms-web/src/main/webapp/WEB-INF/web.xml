@@ -8,7 +8,7 @@
     <!--Context Configuration locations for Spring XML files -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext-web.xml</param-value>
+        <param-value>classpath*:applicationContext-core.xml</param-value>
     </context-param>
 
     <filter>

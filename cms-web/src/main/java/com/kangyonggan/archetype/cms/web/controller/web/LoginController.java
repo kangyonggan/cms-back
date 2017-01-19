@@ -1,14 +1,18 @@
 package com.kangyonggan.archetype.cms.web.controller.web;
 
+import com.kangyonggan.archetype.cms.biz.service.MailService;
+import com.kangyonggan.archetype.cms.biz.service.UserService;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import com.kangyonggan.archetype.cms.model.vo.User;
 import com.kangyonggan.archetype.cms.web.controller.BaseController;
+import com.kangyonggan.archetype.cms.web.util.IPUtil;
 import lombok.extern.log4j.Log4j2;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +31,12 @@ import java.util.Map;
 @RequestMapping("/")
 @Log4j2
 public class LoginController extends BaseController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private MailService mailService;
 
     /**
      * 登录界面
@@ -115,6 +125,64 @@ public class LoginController extends BaseController {
         log.info("logout {}", subject.getPrincipal());
         subject.logout();
         return "redirect:/";
+    }
+
+    /**
+     * 找回密码界面
+     *
+     * @return
+     */
+    @RequestMapping(value = "reset", method = RequestMethod.GET)
+    public String reset() {
+        return getPathRoot() + "/reset";
+    }
+
+    /**
+     * 找回密码
+     *
+     * @param email
+     * @param captcha
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "reset", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> reset(@RequestParam("email") String email, @RequestParam("captcha") String captcha,
+                                     HttpServletRequest request) {
+        Map<String, Object> resultMap = getResultMap();
+
+        log.info("找回密码的邮箱：{}", email);
+        log.info("找回密码的验证码：{}", captcha);
+        String realCaptcha = (String) request.getSession().getAttribute(AppConstants.KEY_CAPTCHA);
+        log.info("session中的验证码：{}", realCaptcha);
+
+        if (!captcha.equalsIgnoreCase(realCaptcha)) {
+            resultMap.put(ERR_CODE, FAILURE);
+            resultMap.put(ERR_MSG, "验证码错误或已失效");
+            return resultMap;
+        }
+
+        User user = userService.findUserByEmail(email);
+        if (user == null) {
+            setResultMapFailure(resultMap, "没有此邮箱的注册信息");
+            log.info(resultMap.get("errMsg"));
+            return resultMap;
+        }
+
+        mailService.sendResetMail(user, IPUtil.getServerHost(request));
+        resultMap.put("errMsg", "/#reset-result");
+
+        return resultMap;
+    }
+
+    /**
+     * 找回密码结果界面
+     *
+     * @return
+     */
+    @RequestMapping(value = "reset-result", method = RequestMethod.GET)
+    public String result() {
+        return getPathRoot() + "/reset-result";
     }
 
 }

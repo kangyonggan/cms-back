@@ -14,5 +14,9 @@
     <import resource="applicationContext-provider.xml"/>
     <!--redis缓存-->
     <import resource="applicationContext-redis.xml"/>
+    <!--shiro权限配置-->
+    <import resource="applicationContext-shiro.xml"/>
+    <!--Freemarker模板-->
+    <import resource="applicationContext-freemarker.xml"/>
 
 </beans>

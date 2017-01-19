@@ -70,4 +70,12 @@ public interface UserService {
      * @param user
      */
     void saveUserWithDefaultRole(User user);
+
+    /**
+     * 校验邮件是否存在
+     *
+     * @param email
+     * @return
+     */
+    boolean existsEmail(String email);
 }

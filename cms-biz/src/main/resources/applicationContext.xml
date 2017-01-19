@@ -33,6 +33,8 @@
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
             <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="send*" propagation="REQUIRED"/>
+            <tx:method name="import*" propagation="REQUIRED"/>
 
             <tx:method name="search*" read-only="true" propagation="REQUIRED"/>
             <tx:method name="find*" read-only="true" propagation="REQUIRED"/>

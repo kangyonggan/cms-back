@@ -123,6 +123,14 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         saveUserRoles(user.getUsername(), AppConstants.DEFAULT_ROLE_CODE);
     }
 
+    @Override
+    @LogTime
+    public boolean existsEmail(String email) {
+        User user = new User();
+        user.setEmail(email);
+        return userMapper.selectCount(user) == 1;
+    }
+
     /**
      * 保存用户基础信息
      *

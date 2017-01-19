@@ -60,7 +60,7 @@
 
         <div class="toolbar clearfix">
             <div>
-                <a href="javascript:" class="forgot-password-link">
+                <a href="#reset" class="forgot-password-link">
                     <i class="ace-icon fa fa-arrow-left"></i>
                     忘记密码？
                 </a>

@@ -3,6 +3,7 @@ package com.kangyonggan.archetype.cms.web.controller.web;
 import com.kangyonggan.archetype.cms.biz.service.MenuService;
 import com.kangyonggan.archetype.cms.biz.service.RoleService;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +42,21 @@ public class ValidateController {
         }
 
         return !userService.existsUsername(username);
+    }
+
+    /**
+     * 校验邮箱是否存在
+     *
+     * @param email
+     * @return
+     */
+    @RequestMapping(value = "email", method = RequestMethod.POST)
+    public boolean validateEmail(@RequestParam("email") String email) {
+        if (StringUtils.isEmpty(email)) {
+            return true;
+        }
+
+        return userService.existsEmail(email);
     }
 
     /**

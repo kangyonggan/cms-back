@@ -2,11 +2,11 @@
     margin-left: 15px;
 }
 
-#login-box,#signup-box {
+#login-box,#signup-box,#forgot-box {
     border: 1px solid #CCC;
 }
 
-#login-box .toolbar,#signup-box .toolbar {
+#login-box .toolbar,#signup-box .toolbar,#forgot-box .toolbar {
     background: #444;
     border-top: 2px solid #000;
 }
