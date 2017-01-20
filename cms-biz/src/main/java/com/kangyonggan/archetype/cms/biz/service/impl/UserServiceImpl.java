@@ -1,8 +1,11 @@
 package com.kangyonggan.archetype.cms.biz.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
 import com.kangyonggan.archetype.cms.biz.util.Digests;
 import com.kangyonggan.archetype.cms.biz.util.Encodes;
+import com.kangyonggan.archetype.cms.biz.util.StringUtil;
+import com.kangyonggan.archetype.cms.mapper.RoleMapper;
 import com.kangyonggan.archetype.cms.mapper.UserMapper;
 import com.kangyonggan.archetype.cms.mapper.UserProfileMapper;
 import com.kangyonggan.archetype.cms.model.annotation.CacheDelete;
@@ -17,8 +20,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author kangyonggan
@@ -32,6 +37,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Autowired
     private UserProfileMapper userProfileMapper;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     @LogTime
@@ -138,6 +146,40 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     public void updateUserPassword(User user) {
         entryptPassword(user);
         super.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    @LogTime
+    public List<User> searchUsers(int pageNum, String fullname) {
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+
+        if (StringUtils.isNotEmpty(fullname)) {
+            criteria.andLike("fullname", StringUtil.toLikeString(fullname));
+        }
+
+        example.setOrderByClause("id desc");
+
+        PageHelper.startPage(pageNum, AppConstants.PAGE_SIZE);
+        return super.selectByExample(example);
+    }
+
+    @Override
+    @LogTime
+    @CacheDelete("user:id:{0:id}||user:all")
+    public void updateUser(User user) {
+        super.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    @LogTime
+    @CacheDelete("menu:username:{0}||role:username:{0}")
+    public void updateUserRoles(String username, String roleCodes) {
+        roleMapper.deleteAllRolesByUsername(username);
+
+        if (StringUtils.isNotEmpty(roleCodes)) {
+            saveUserRoles(username, roleCodes);
+        }
     }
 
     /**

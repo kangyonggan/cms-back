@@ -15,4 +15,11 @@ public interface RoleMapper extends MyMapper<Role> {
      * @return
      */
     List<Role> selectRolesByUsername(String username);
+
+    /**
+     * 删除所有用户角色
+     *
+     * @param username
+     */
+    void deleteAllRolesByUsername(String username);
 }

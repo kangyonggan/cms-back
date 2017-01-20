@@ -23,4 +23,11 @@
             ORDER BY r.id DESC
         </where>
     </select>
+
+    <delete id="deleteAllRolesByUsername">
+        DELETE FROM user_role
+        <where>
+            username = #{username}
+        </where>
+    </delete>
 </mapper>

@@ -4,6 +4,7 @@ import com.kangyonggan.archetype.cms.biz.service.RoleService;
 import com.kangyonggan.archetype.cms.mapper.RoleMapper;
 import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
 import com.kangyonggan.archetype.cms.model.annotation.LogTime;
+import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import com.kangyonggan.archetype.cms.model.vo.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,15 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 
         return roleMapper.selectCount(role) == 1;
     }
+
+    @Override
+    @LogTime
+    @CacheGetOrSave("role:all")
+    public List<Role> findAllRoles() {
+        Role role = new Role();
+        role.setIsDeleted(AppConstants.IS_DELETED_NO);
+
+        return super.select(role);
+    }
+
 }

@@ -3,6 +3,8 @@ package com.kangyonggan.archetype.cms.biz.service;
 import com.kangyonggan.archetype.cms.model.vo.ShiroUser;
 import com.kangyonggan.archetype.cms.model.vo.User;
 
+import java.util.List;
+
 /**
  * @author kangyonggan
  * @since 2017/1/19
@@ -85,4 +87,29 @@ public interface UserService {
      * @param user
      */
     void updateUserPassword(User user);
+
+    /**
+     * 搜索用户
+     *
+     * @param pageNum
+     * @param fullname
+     * @return
+     */
+    List<User> searchUsers(int pageNum, String fullname);
+
+    /**
+     * 更新用户
+     *
+     * @param user
+     */
+    void updateUser(User user);
+
+    /**
+     * 修改用户角色
+     *
+     * @param username
+     * @param roleCodes
+     */
+    void updateUserRoles(String username, String roleCodes);
+
 }
