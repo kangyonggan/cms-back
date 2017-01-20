@@ -1,5 +1,7 @@
 <#assign ctx="${(rca.contextPath)!''}">
 <#assign fullname = RequestParameters.fullname!'' />
+<#assign mobile = RequestParameters.mobile!'' />
+<#assign email = RequestParameters.email!'' />
 
 <div class="page-header">
     <h1>
@@ -18,6 +20,14 @@
         <input type="text" class="form-control" name="fullname" value="${fullname}" placeholder="姓名"
                autocomplete="off"/>
     </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="mobile" value="${mobile}" placeholder="手机号"
+               autocomplete="off"/>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="email" value="${email}" placeholder="邮箱"
+               autocomplete="off"/>
+    </div>
 
     <button class="btn btn-sm btn-inverse" data-toggle="search-submit">
         搜索
@@ -32,6 +42,8 @@
     <tr>
         <th>用户名</th>
         <th>姓名</th>
+        <th>手机号</th>
+        <th>邮箱</th>
         <th>逻辑删除</th>
         <th>创建时间</th>
         <th>操作</th>
@@ -51,6 +63,6 @@
     </#if>
     </tbody>
 </table>
-<@c.pagination url="#system/user" param="fullname=${fullname}"/>
+<@c.pagination url="#system/user" param="fullname=${fullname}&mobile=${mobile}&email=${email}"/>
 
 <script src="${ctx}/static/app/js/dashboard/system/user/list.js"></script>

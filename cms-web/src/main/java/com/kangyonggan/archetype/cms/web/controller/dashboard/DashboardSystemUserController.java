@@ -38,6 +38,8 @@ public class DashboardSystemUserController extends BaseController {
      *
      * @param pageNum
      * @param fullname
+     * @param mobile
+     * @param email
      * @param model
      * @return
      */
@@ -45,8 +47,10 @@ public class DashboardSystemUserController extends BaseController {
     @RequiresPermissions("SYSTEM_USER")
     public String index(@RequestParam(value = "p", required = false, defaultValue = "1") int pageNum,
                         @RequestParam(value = "fullname", required = false, defaultValue = "") String fullname,
+                        @RequestParam(value = "mobile", required = false, defaultValue = "") String mobile,
+                        @RequestParam(value = "email", required = false, defaultValue = "") String email,
                         Model model) {
-        List<User> users = userService.searchUsers(pageNum, fullname);
+        List<User> users = userService.searchUsers(pageNum, fullname, mobile, email);
         PageInfo<User> page = new PageInfo(users);
 
         model.addAttribute("page", page);

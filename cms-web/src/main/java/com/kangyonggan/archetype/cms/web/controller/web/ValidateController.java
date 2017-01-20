@@ -5,7 +5,6 @@ import com.kangyonggan.archetype.cms.biz.service.RoleService;
 import com.kangyonggan.archetype.cms.biz.service.TokenService;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
 import com.kangyonggan.archetype.cms.model.vo.Token;
-import com.kangyonggan.archetype.cms.model.vo.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,6 +65,42 @@ public class ValidateController {
         }
 
         return userService.existsEmail(email);
+    }
+
+    /**
+     * 校验邮箱是否存在
+     *
+     * @param email
+     * @param oldEmail
+     * @return
+     */
+    @RequestMapping(value = "email2", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean validateEmail2(@RequestParam("email") String email,
+                                  @RequestParam(value = "oldEmail", required = false, defaultValue = "") String oldEmail) {
+        if (email.equals(oldEmail)) {
+            return true;
+        }
+
+        return !userService.existsEmail(email);
+    }
+
+    /**
+     * 校验手机号是否存在
+     *
+     * @param mobile
+     * @param oldMobile
+     * @return
+     */
+    @RequestMapping(value = "mobile", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean validateMobile(@RequestParam("mobile") String mobile,
+                                  @RequestParam(value = "oldMobile", required = false, defaultValue = "") String oldMobile) {
+        if (mobile.equals(oldMobile)) {
+            return true;
+        }
+
+        return !userService.existsMobile(mobile);
     }
 
     /**

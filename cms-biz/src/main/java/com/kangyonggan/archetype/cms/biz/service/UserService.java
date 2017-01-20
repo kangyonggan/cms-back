@@ -93,9 +93,11 @@ public interface UserService {
      *
      * @param pageNum
      * @param fullname
+     * @param mobile
+     * @param email
      * @return
      */
-    List<User> searchUsers(int pageNum, String fullname);
+    List<User> searchUsers(int pageNum, String fullname, String mobile, String email);
 
     /**
      * 更新用户
@@ -112,4 +114,11 @@ public interface UserService {
      */
     void updateUserRoles(String username, String roleCodes);
 
+    /**
+     * 校验手机号是否存在
+     *
+     * @param mobile
+     * @return
+     */
+    boolean existsMobile(String mobile);
 }

@@ -32,11 +32,38 @@ $(function () {
             fullname: {
                 required: true,
                 isFullname: true
-            }
-        },
-        messages: {
-            username: {
-                remote: "不可用"
+            },
+            mobile: {
+                required: false,
+                isMobile: true,
+                remote: {
+                    url: "/validate/mobile",
+                    type: 'post',
+                    data: {
+                        'mobile': function () {
+                            return $('#mobile').val()
+                        },
+                        'oldMobile': function () {
+                            return $('#old-mobile').val()
+                        }
+                    }
+                }
+            },
+            email: {
+                required: false,
+                email: true,
+                remote: {
+                    url: "/validate/email2",
+                    type: 'post',
+                    data: {
+                        'email': function () {
+                            return $('#email').val()
+                        },
+                        'oldEmail': function () {
+                            return $('#old-email').val()
+                        }
+                    }
+                }
             }
         },
         submitHandler: function (form, event) {

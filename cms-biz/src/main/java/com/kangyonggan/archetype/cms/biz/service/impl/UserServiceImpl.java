@@ -150,12 +150,20 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Override
     @LogTime
-    public List<User> searchUsers(int pageNum, String fullname) {
+    public List<User> searchUsers(int pageNum, String fullname, String mobile, String email) {
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
 
         if (StringUtils.isNotEmpty(fullname)) {
             criteria.andLike("fullname", StringUtil.toLikeString(fullname));
+        }
+
+        if (StringUtils.isNotEmpty(mobile)) {
+            criteria.andLike("mobile", StringUtil.toLikeString(mobile));
+        }
+
+        if (StringUtils.isNotEmpty(email)) {
+            criteria.andLike("email", StringUtil.toLikeString(email));
         }
 
         example.setOrderByClause("id desc");
@@ -180,6 +188,14 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         if (StringUtils.isNotEmpty(roleCodes)) {
             saveUserRoles(username, roleCodes);
         }
+    }
+
+    @Override
+    @LogTime
+    public boolean existsMobile(String mobile) {
+        User user = new User();
+        user.setMobile(mobile);
+        return userMapper.selectCount(user) == 1;
     }
 
     /**

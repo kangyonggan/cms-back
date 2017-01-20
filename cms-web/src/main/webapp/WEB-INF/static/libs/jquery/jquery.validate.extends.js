@@ -62,31 +62,17 @@ $.extend($.validator.addMethod("isName", function (value) {
 }, "请输入2至12个汉字"));
 
 $.extend($.validator.addMethod("isMenuCode", function (value) {
-    var str = /^ADMIN[A-Z_]{0,27}$|^DASHBOARD[A-Z_]{0,23}$/;
+    var str = /^ADMIN[A-Z_]{0,27}$/;
     return str.test(value);
-}, "以ADMIN或DASHBOARD开头,纯大写,可带下划线,不超过32位"));
+}, "以DASHBOARD开头,纯大写,可带下划线,不超过32位"));
 
 $.extend($.validator.addMethod("isMenuUrl", function (value) {
-    var str = /^admin[a-z\/]{0,27}$|^dashboard[a-z\/]{0,23}$/;
+    var str = /^admin[a-z\/]{0,27}$/;
     return str.test(value);
-}, "以admin或dashboard开头,纯小写,可带斜杠,不超过32位"));
+}, "dashboard开头,纯小写,可带斜杠,不超过32位"));
 
-$.extend($.validator.addMethod("isMenuSort", function (value) {
-    var str = /^[0-9]$|^[1-9][0-9]$/;
-    return str.test(value);
-}, "请输入大于等于0小于100整数"));
-
-$.extend($.validator.addMethod("isDicSort", function (value) {
-    var str = /^[0-9]$|^[1-9][0-9]{0,3}$/;
-    return str.test(value);
-}, "请输入大于等于0小于10000整数"));
-
-$.extend($.validator.addMethod("isDeptCode", function (value) {
-    var str = /^[a-z]{1,12}$/;
-    return str.test(value);
-}, "请输入纯小写字母,不超12位"));
-
-$.extend($.validator.addMethod("isDicCode", function (value) {
-    var str = /^[a-z][0-9a-z]{0,19}$/;
-    return str.test(value);
-}, "请输入5至20位以字母开头的小写字母和数字的组合"));
+$.extend($.validator.addMethod("isMobile", function(value, element) {
+    var length = value.length;
+    var mobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+    return this.optional(element) || (length == 11 && mobile.test(value));
+}, "请正确填写您的手机号码"));

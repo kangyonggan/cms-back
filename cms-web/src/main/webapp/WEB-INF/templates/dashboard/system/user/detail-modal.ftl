@@ -16,6 +16,14 @@
         <td>${user.fullname}</td>
     </tr>
     <tr>
+        <th>手机号</th>
+        <td>${user.mobile}</td>
+    </tr>
+    <tr>
+        <th>邮箱</th>
+        <td>${user.email}</td>
+    </tr>
+    <tr>
         <th>逻辑删除</th>
         <td>${(user.isDeleted==1)?string('是', '否')}</td>
     </tr>

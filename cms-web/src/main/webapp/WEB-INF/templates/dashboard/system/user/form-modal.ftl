@@ -25,7 +25,7 @@
                     <label>密码<span class="red">*</span></label>
                 </div>
                 <div class="col-md-7 controls">
-                    <input type="text" id="password" name="password" class="form-control" placeholder="6至20位的字母数字组合"/>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="6至20位的字母数字组合"/>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     <label>确认密码<span class="red">*</span></label>
                 </div>
                 <div class="col-md-7 controls">
-                    <input type="text" name="rePassword" class="form-control" placeholder="6至20位的字母数字组合"/>
+                    <input type="password" name="rePassword" class="form-control" placeholder="6至20位的字母数字组合"/>
                 </div>
             </div>
         </div>
@@ -47,6 +47,28 @@
             </div>
             <div class="col-md-7 controls">
                 <@spring.formInput "user.fullname" 'class="form-control" placeholder="2至4个汉字"'/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row form-group">
+            <div class="col-md-3 control-label">
+                <label>手机号</label>
+            </div>
+            <div class="col-md-7 controls">
+                <@spring.formInput "user.mobile" 'class="form-control" placeholder="请输入11位的手机号"'/>
+                <input type="hidden" id="old-mobile" value="${user.mobile!''}"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row form-group">
+            <div class="col-md-3 control-label">
+                <label>邮箱</label>
+            </div>
+            <div class="col-md-7 controls">
+                <@spring.formInput "user.email" 'class="form-control" placeholder="请输入邮箱，可以用来找回密码"'/>
+                <input type="hidden" id="old-email" value="${user.email!''}"/>
             </div>
         </div>
     </div>
