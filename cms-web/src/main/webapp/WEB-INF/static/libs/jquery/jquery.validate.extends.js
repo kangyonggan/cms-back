@@ -62,14 +62,14 @@ $.extend($.validator.addMethod("isName", function (value) {
 }, "请输入2至12个汉字"));
 
 $.extend($.validator.addMethod("isMenuCode", function (value) {
-    var str = /^ADMIN[A-Z_]{0,27}$/;
+    var str = /^[A-Z_]{1,32}$/;
     return str.test(value);
-}, "以DASHBOARD开头,纯大写,可带下划线,不超过32位"));
+}, "纯大写,可带下划线,不超过32位"));
 
 $.extend($.validator.addMethod("isMenuUrl", function (value) {
-    var str = /^admin[a-z\/]{0,27}$/;
+    var str = /^[a-z\/]{1,32}$/;
     return str.test(value);
-}, "dashboard开头,纯小写,可带斜杠,不超过32位"));
+}, "纯小写,可带斜杠,不超过32位"));
 
 $.extend($.validator.addMethod("isMobile", function(value, element) {
     var length = value.length;

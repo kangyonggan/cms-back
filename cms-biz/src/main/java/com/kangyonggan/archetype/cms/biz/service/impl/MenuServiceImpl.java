@@ -2,6 +2,7 @@ package com.kangyonggan.archetype.cms.biz.service.impl;
 
 import com.kangyonggan.archetype.cms.biz.service.MenuService;
 import com.kangyonggan.archetype.cms.mapper.MenuMapper;
+import com.kangyonggan.archetype.cms.model.annotation.CacheDeleteAll;
 import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
 import com.kangyonggan.archetype.cms.model.annotation.LogTime;
 import com.kangyonggan.archetype.cms.model.vo.Menu;
@@ -58,6 +59,44 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
         List<Menu> wrapList = new ArrayList();
 
         return recursionTreeList(menus, wrapList, "", 0L);
+    }
+
+    @Override
+    @LogTime
+    @CacheGetOrSave("menu:code:{0}")
+    public Menu findMenuByCode(String code) {
+        Menu menu = new Menu();
+        menu.setCode(code);
+
+        return super.selectOne(menu);
+    }
+
+    @Override
+    @LogTime
+    @CacheDeleteAll("menu")
+    public void saveMenu(Menu menu) {
+        super.insertSelective(menu);
+    }
+
+    @Override
+    @LogTime
+    @CacheGetOrSave("menu:id:{0}")
+    public Menu findMenuById(Long id) {
+        return super.selectByPrimaryKey(id);
+    }
+
+    @Override
+    @LogTime
+    @CacheDeleteAll("menu")
+    public void updateMenu(Menu menu) {
+        super.updateByPrimaryKeySelective(menu);
+    }
+
+    @Override
+    @LogTime
+    @CacheDeleteAll("menu")
+    public void deleteMenu(Menu menu) {
+        super.deleteByPrimaryKey(menu);
     }
 
     /**
