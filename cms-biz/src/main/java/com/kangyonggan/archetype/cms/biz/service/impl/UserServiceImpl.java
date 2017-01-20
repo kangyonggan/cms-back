@@ -103,7 +103,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @LogTime
     @CacheGetOrSave("user:id:{0}")
     public User findUserById(Long id) {
-        User user =  super.selectByPrimaryKey(id);
+        User user = super.selectByPrimaryKey(id);
 
         if (user != null) {
             user.setPassword(null);
@@ -196,6 +196,15 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         User user = new User();
         user.setMobile(mobile);
         return userMapper.selectCount(user) == 1;
+    }
+
+    @Override
+    @LogTime
+    public UserProfile findUserProfileByUsername(String username) {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUsername(username);
+
+        return userProfileMapper.selectOne(userProfile);
     }
 
     /**

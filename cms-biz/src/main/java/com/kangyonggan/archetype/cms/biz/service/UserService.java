@@ -2,6 +2,7 @@ package com.kangyonggan.archetype.cms.biz.service;
 
 import com.kangyonggan.archetype.cms.model.vo.ShiroUser;
 import com.kangyonggan.archetype.cms.model.vo.User;
+import com.kangyonggan.archetype.cms.model.vo.UserProfile;
 
 import java.util.List;
 
@@ -121,4 +122,12 @@ public interface UserService {
      * @return
      */
     boolean existsMobile(String mobile);
+
+    /**
+     * 查找用户详细信息
+     *
+     * @param username
+     * @return
+     */
+    UserProfile findUserProfileByUsername(String username);
 }

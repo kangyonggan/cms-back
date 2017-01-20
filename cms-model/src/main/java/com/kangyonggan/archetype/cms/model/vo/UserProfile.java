@@ -43,6 +43,16 @@ public class UserProfile implements Serializable {
     private String phone;
 
     /**
+     * QQ号
+     */
+    private String qq;
+
+    /**
+     * 微信号
+     */
+    private String weixin;
+
+    /**
      * 身份证
      */
     @Column(name = "id_card")

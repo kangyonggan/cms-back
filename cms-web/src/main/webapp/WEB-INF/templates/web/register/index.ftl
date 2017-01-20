@@ -46,7 +46,7 @@
                     <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
                             <input type="text" name="fullname" class="form-control"
-                                   placeholder="2至4个汉字"/>
+                                   placeholder="姓名:2至4个汉字"/>
                             <i class="ace-icon fa fa-leaf"></i>
                         </span>
                     </label>

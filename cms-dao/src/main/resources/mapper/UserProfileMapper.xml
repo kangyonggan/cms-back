@@ -11,6 +11,8 @@
         <result column="large_avatar" property="largeAvatar" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="TINYINT"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="weixin" property="weixin" jdbcType="VARCHAR"/>
         <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
         <result column="web_site" property="webSite" jdbcType="VARCHAR"/>
         <result column="country_code" property="countryCode" jdbcType="VARCHAR"/>

@@ -65,6 +65,10 @@ CREATE TABLE user_profile
   COMMENT '性别:{0:男, 1:女}',
   phone         VARCHAR(32)                           NOT NULL                    DEFAULT ''
   COMMENT '座机号',
+  qq            VARCHAR(16)                           NOT NULL                    DEFAULT ''
+  COMMENT 'QQ号',
+  weixin        VARCHAR(64)                           NOT NULL                    DEFAULT ''
+  COMMENT '微信号',
   id_card       VARCHAR(32)                           NOT NULL                    DEFAULT ''
   COMMENT '身份证',
   web_site      VARCHAR(64)                           NOT NULL                    DEFAULT ''
@@ -307,8 +311,7 @@ VALUES
   ('CONTENT_PAGE', '页面管理', 'CONTENT', 'content/page', 2, ''),
 
   ('USER', '我的', 'DASHBOARD', 'user', 3, 'menu-icon fa fa-user'),
-  ('USER_PROFILE', '基本信息', 'USER', 'user/profile', 0, ''),
-  ('USER_MESSAGE', '我的消息', 'USER', 'user/message', 1, '');
+  ('USER_PROFILE', '个人资料', 'USER', 'user/profile', 0, '');
 
 -- ----------------------------
 --  data for user_role
