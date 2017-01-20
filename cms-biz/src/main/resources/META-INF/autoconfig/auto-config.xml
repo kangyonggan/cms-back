@@ -42,7 +42,6 @@
 
         <property name="cms.slow.method.time" description="慢方法时间(秒)" defaultValue="5"/>
         <property name="cms.slow.interface.time" description="慢接口时间(秒)" defaultValue="5"/>
-        <property name="cms.redis.prefix.key" description="redis键的前缀" defaultValue="cms"/>
         <property name="cms.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
     </group>
     <script>

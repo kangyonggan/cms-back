@@ -7,6 +7,7 @@ import com.kangyonggan.archetype.cms.biz.util.StringUtil;
 import com.kangyonggan.archetype.cms.model.annotation.CacheDelete;
 import com.kangyonggan.archetype.cms.model.annotation.CacheDeleteAll;
 import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
+import com.kangyonggan.archetype.cms.model.constants.System;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -37,7 +38,7 @@ public class CacheAop {
     /**
      * redis键的前缀
      */
-    private String prefix = PropertiesUtil.getProperties("redis.prefix.key") + ":";
+    private String prefix = System.CMS.getCode() + ":";
 
     /**
      * 是否打开缓存
