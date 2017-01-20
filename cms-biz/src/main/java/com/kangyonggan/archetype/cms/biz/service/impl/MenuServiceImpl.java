@@ -8,6 +8,7 @@ import com.kangyonggan.archetype.cms.model.vo.Menu;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,24 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
         menu.setCode(code);
 
         return menuMapper.selectCount(menu) == 1;
+    }
+
+    @Override
+    @CacheGetOrSave("menu:role:{0}")
+    public List<Menu> findMenus4Role(String code) {
+        return menuMapper.selectMenus4Role(code);
+    }
+
+    @Override
+    @CacheGetOrSave("menu:all")
+    public List<Menu> findAllMenus() {
+        Example example = new Example(Menu.class);
+        example.setOrderByClause("sort asc");
+
+        List<Menu> menus = super.selectByExample(example);
+        List<Menu> wrapList = new ArrayList();
+
+        return recursionTreeList(menus, wrapList, "", 0L);
     }
 
     /**

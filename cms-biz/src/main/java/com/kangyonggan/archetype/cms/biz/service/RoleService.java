@@ -33,4 +33,43 @@ public interface RoleService {
      */
     List<Role> findAllRoles();
 
+    /**
+     * 搜索角色
+     *
+     * @param pageNum
+     * @param code
+     * @param name
+     * @return
+     */
+    List<Role> searchRoles(int pageNum, String code, String name);
+
+    /**
+     * 保存角色
+     *
+     * @param role
+     */
+    void saveRole(Role role);
+
+    /**
+     * 根据id查找角色
+     *
+     * @param id
+     * @return
+     */
+    Role findRoleById(Long id);
+
+    /**
+     * 更新角色
+     *
+     * @param role
+     */
+    void updateRole(Role role);
+
+    /**
+     * 更新角色菜单
+     *
+     * @param code
+     * @param menuCodes
+     */
+    void updateRoleMenus(String code, String menuCodes);
 }

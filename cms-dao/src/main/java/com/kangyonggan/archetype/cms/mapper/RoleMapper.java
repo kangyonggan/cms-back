@@ -1,6 +1,7 @@
 package com.kangyonggan.archetype.cms.mapper;
 
 import com.kangyonggan.archetype.cms.model.vo.Role;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,20 @@ public interface RoleMapper extends MyMapper<Role> {
      * @param username
      */
     void deleteAllRolesByUsername(String username);
+
+    /**
+     * 删除角色菜单
+     *
+     * @param code
+     */
+    void deleteRoleMenus(@Param("code") String code);
+
+    /**
+     * 插入角色菜单
+     *
+     * @param code
+     * @param menuCodes
+     */
+    void insertRoleMenus(@Param("code") String code, @Param("menuCodes") List<String> menuCodes);
+
 }

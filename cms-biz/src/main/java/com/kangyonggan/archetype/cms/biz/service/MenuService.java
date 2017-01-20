@@ -25,4 +25,19 @@ public interface MenuService {
      * @return
      */
     boolean existsMenuCode(String code);
+
+    /**
+     * 查找角色菜单
+     *
+     * @param code
+     * @return
+     */
+    List<Menu> findMenus4Role(String code);
+
+    /**
+     * 查找所有菜单
+     *
+     * @return
+     */
+    List<Menu> findAllMenus();
 }
