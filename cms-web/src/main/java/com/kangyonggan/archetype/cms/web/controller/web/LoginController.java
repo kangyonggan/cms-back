@@ -1,8 +1,10 @@
 package com.kangyonggan.archetype.cms.web.controller.web;
 
 import com.kangyonggan.archetype.cms.biz.service.MailService;
+import com.kangyonggan.archetype.cms.biz.service.TokenService;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
+import com.kangyonggan.archetype.cms.model.vo.Token;
 import com.kangyonggan.archetype.cms.model.vo.User;
 import com.kangyonggan.archetype.cms.web.controller.BaseController;
 import com.kangyonggan.archetype.cms.web.util.IPUtil;
@@ -14,6 +16,7 @@ import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -37,6 +41,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 登录界面
@@ -178,11 +185,64 @@ public class LoginController extends BaseController {
     /**
      * 找回密码结果界面
      *
+     * @param model
      * @return
      */
     @RequestMapping(value = "reset-result", method = RequestMethod.GET)
-    public String result() {
+    public String result(Model model) {
+        model.addAttribute("message", "找回密码处理中!!!<br/>请稍后去邮箱查看找回结果...");
         return getPathRoot() + "/reset-result";
+    }
+
+    /**
+     * 重置密码结果界面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "reset-password-result", method = RequestMethod.GET)
+    public String resultPassword(Model model) {
+        model.addAttribute("message", "重置密码成功!!!");
+        return getPathRoot() + "/reset-result";
+    }
+
+    /**
+     * 重置密码
+     *
+     * @param code
+     * @param userId
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "reset/password", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> resetPassword(@RequestParam("code") String code, @RequestParam("userId") Long userId,
+                                             @RequestParam("password") String password) {
+        Map<String, Object> resultMap = getResultMap();
+
+        Token token = tokenService.findTokenByCode(code);
+        User user = userService.findUserById(userId);
+
+        if (token == null) {
+            setResultMapFailure(resultMap, "链接不合法，请检查在拷贝过程中是否遗漏！");
+        } else if (token.getExpireTime().before(new Date())) {
+            setResultMapFailure(resultMap, "链接已过期，请重新发起找回密码请求！");
+        } else if (token.getIsDeleted() == 1) {
+            setResultMapFailure(resultMap, "链接已被使用，不能重复使用！");
+        } else {
+            if (user == null) {
+                setResultMapFailure(resultMap, "用户不存在");
+            } else {
+                token.setIsDeleted((byte) 1);
+                tokenService.updateToken(token);
+
+                user.setPassword(password);
+                userService.updateUserPassword(user);
+            }
+        }
+
+        resultMap.put("errMsg", "/#reset-password-result");
+        return resultMap;
     }
 
 }

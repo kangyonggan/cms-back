@@ -78,4 +78,11 @@ public interface UserService {
      * @return
      */
     boolean existsEmail(String email);
+
+    /**
+     * 更新用户的密码
+     *
+     * @param user
+     */
+    void updateUserPassword(User user);
 }

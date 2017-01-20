@@ -2,7 +2,7 @@
 
 <@override name="content">
 <h1 class="center green">
-    找回密码处理中!!!<br/>请稍后去邮箱查看找回结果...
+    ${message!''}
 </h1>
 
 <div class="space-20"></div>

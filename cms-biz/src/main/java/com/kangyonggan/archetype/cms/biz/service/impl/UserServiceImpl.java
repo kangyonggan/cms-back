@@ -5,6 +5,7 @@ import com.kangyonggan.archetype.cms.biz.util.Digests;
 import com.kangyonggan.archetype.cms.biz.util.Encodes;
 import com.kangyonggan.archetype.cms.mapper.UserMapper;
 import com.kangyonggan.archetype.cms.mapper.UserProfileMapper;
+import com.kangyonggan.archetype.cms.model.annotation.CacheDelete;
 import com.kangyonggan.archetype.cms.model.annotation.CacheDeleteAll;
 import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
 import com.kangyonggan.archetype.cms.model.annotation.LogTime;
@@ -129,6 +130,14 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         User user = new User();
         user.setEmail(email);
         return userMapper.selectCount(user) == 1;
+    }
+
+    @Override
+    @LogTime
+    @CacheDelete("user:id:{0:id}")
+    public void updateUserPassword(User user) {
+        entryptPassword(user);
+        super.updateByPrimaryKeySelective(user);
     }
 
     /**

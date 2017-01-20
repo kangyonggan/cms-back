@@ -2,7 +2,7 @@
 
 <@override name="content">
 <div class="position-relative">
-    <div id="forgot-box" class="forgot-box widget-box fa-border skin-border">
+    <div id="forgot-box" class="forgot-box widget-box fa-border">
         <div class="widget-body">
             <div class="widget-main clearfix">
                 <h4 class="header lighter bigger skin-color">

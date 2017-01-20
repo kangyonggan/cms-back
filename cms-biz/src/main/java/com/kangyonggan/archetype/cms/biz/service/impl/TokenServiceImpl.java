@@ -30,6 +30,19 @@ public class TokenServiceImpl extends BaseService<Token> implements TokenService
         return code;
     }
 
+    @Override
+    public Token findTokenByCode(String code) {
+        Token token = new Token();
+        token.setCode(code);
+
+        return super.selectOne(token);
+    }
+
+    @Override
+    public void updateToken(Token token) {
+        super.updateByPrimaryKeySelective(token);
+    }
+
     private String genTokenCode() {
         byte[] hashKey = Digests.sha1(Digests.generateSalt(AppConstants.SALT_SIZE));
         return Encodes.encodeHex(hashKey);
