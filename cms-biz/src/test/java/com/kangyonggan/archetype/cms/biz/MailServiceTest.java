@@ -18,7 +18,7 @@ public class MailServiceTest extends AbstractServiceTest {
      */
     @Test
     public void testSendResetMail() {
-        mailService.send("2825176081@qq.com", "test:<h1>测试邮件</h1>", true);
+        mailService.send("2825176081@qq.com", "找回密码", "test:<h1>测试邮件</h1>", true);
     }
 
 }

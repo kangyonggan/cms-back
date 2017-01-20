@@ -2,8 +2,10 @@ package com.kangyonggan.archetype.cms.biz.util;
 
 import lombok.extern.log4j.Log4j2;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
@@ -21,7 +23,8 @@ public class PropertiesUtil {
         try {
             props = new Properties();
             InputStream in = PropertiesUtil.class.getClassLoader().getResourceAsStream("app.properties");
-            props.load(in);
+            InputStreamReader reader = new InputStreamReader(in, "UTF-8");
+            props.load(reader);
         } catch (IOException e) {
             log.error("app.properties加载失败", e);
         }

@@ -60,18 +60,18 @@ public class MailServiceImpl implements MailService {
             return;
         }
 
-        send(user.getEmail(), text, true);
+        send(user.getEmail(), "找回密码", text, true);
     }
 
     @Override
-    public void send(String to, String text, boolean isHtml) {
+    public void send(String to, String title, String text, boolean isHtml) {
         MimeMessage msg = javaMailSender.createMimeMessage();
         try {
             log.info("发件人邮箱：{}", PropertiesUtil.getProperties("mail.username"));
             MimeMessageHelper helper = new MimeMessageHelper(msg, true);
             helper.setFrom(PropertiesUtil.getProperties("mail.username"), PropertiesUtil.getProperties("app.name"));
             helper.setTo(to);
-            helper.setSubject(PropertiesUtil.getProperties("app.name"));
+            helper.setSubject(title);
 
             helper.setText(text, isHtml);
         } catch (Exception e) {

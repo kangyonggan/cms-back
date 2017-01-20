@@ -20,8 +20,9 @@ public interface MailService {
      * 发送邮件
      *
      * @param to
+     * @param title
      * @param text
      * @param isHtml
      */
-    void send(String to, String text, boolean isHtml);
+    void send(String to, String title, String text, boolean isHtml);
 }
