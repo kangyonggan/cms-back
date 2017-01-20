@@ -51,6 +51,11 @@ $.extend($.validator.addMethod("isFullname", function (value) {
     return str.test(value);
 }, "请输入2至4个汉字"));
 
+$.extend($.validator.addMethod("isIdCard", function (value) {
+    var str = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+    return str.test(value);
+}, "请输入正确的18位身份证号码"));
+
 $.extend($.validator.addMethod("isRoleCode", function (value) {
     var str = /^ROLE[A-Z_]{0,28}$/;
     return str.test(value);

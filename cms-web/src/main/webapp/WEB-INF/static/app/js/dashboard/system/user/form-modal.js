@@ -63,7 +63,8 @@ $(function () {
                             return $('#old-email').val()
                         }
                     }
-                }
+                },
+                maxlength: 64
             }
         },
         submitHandler: function (form, event) {

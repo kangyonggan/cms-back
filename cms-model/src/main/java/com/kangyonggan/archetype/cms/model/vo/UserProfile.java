@@ -65,43 +65,7 @@ public class UserProfile implements Serializable {
     private String webSite;
 
     /**
-     * 国家代码
-     */
-    @Column(name = "country_code")
-    private String countryCode;
-
-    /**
-     * 国家名称
-     */
-    @Column(name = "country_name")
-    private String countryName;
-
-    /**
-     * 城市代码
-     */
-    @Column(name = "city_code")
-    private String cityCode;
-
-    /**
-     * 城市名称
-     */
-    @Column(name = "city_name")
-    private String cityName;
-
-    /**
-     * 地区代码
-     */
-    @Column(name = "district_code")
-    private String districtCode;
-
-    /**
-     * 地区名称
-     */
-    @Column(name = "district_name")
-    private String districtName;
-
-    /**
-     * 详细地址
+     * 暂住址
      */
     private String address;
 

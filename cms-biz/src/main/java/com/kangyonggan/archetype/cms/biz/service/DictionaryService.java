@@ -49,4 +49,12 @@ public interface DictionaryService {
      * @return
      */
     boolean existsDictionaryCode(String code);
+
+    /**
+     * 查找一类字典
+     *
+     * @param type
+     * @return
+     */
+    List<Dictionary> findDictionariesByType(String type);
 }

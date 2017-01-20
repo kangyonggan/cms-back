@@ -34,7 +34,7 @@ var showMessage = function (type, message) {
         $.gritter.remove(last_gritter);
     }
     last_gritter = $.gritter.add({
-        title: '通知',
+        title: '消息',
         text: message,
         class_name: type
     });

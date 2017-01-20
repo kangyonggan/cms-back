@@ -1,18 +1,9 @@
 <#assign ctx="${(rca.contextPath)!''}">
 
 <div class="space-10"></div>
-<div class="well well-sm">
-    <div class="inline middle blue bigger-110">信息完整度70%</div>
 
-    &nbsp; &nbsp; &nbsp;
-    <div style="width:200px;" data-percent="70%" class="inline middle no-margin progress progress-striped active">
-        <div class="progress-bar progress-bar-success" style="width:70%"></div>
-    </div>
-</div>
-
-<div class="space"></div>
-
-<form id="form" class="form-horizontal">
+<form id="form" action="${ctx}/dashboard/user/profile" class="form-horizontal" enctype="multipart/form-data">
+    <input type="hidden" id="${user.id}"/>
     <div class="tabbable">
         <ul class="nav nav-tabs padding-16">
             <li class="active">
@@ -74,7 +65,18 @@
 
                             <div class="col-sm-8">
                                 <input class="col-xs-12 col-sm-10" type="text" placeholder="姓名:2至4个汉字"
-                                       value="${user.fullname}">
+                                       name="fullname" value="${user.fullname}">
+                            </div>
+                        </div>
+
+                        <div class="space-4"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="fullname">身份证</label>
+
+                            <div class="col-sm-8">
+                                <input class="col-xs-12 col-sm-10" type="text" placeholder="请输入身份证号码"
+                                       name="idCard" value="${userProfile.idCard}">
                             </div>
                         </div>
 
@@ -153,29 +155,50 @@
 
                 <h4 class="header blue bolder smaller">社交信息</h4>
 
-                <#--TODO-->
-
-            </div>
-
-            <div id="edit-password" class="tab-pane">
-                <div class="space-10"></div>
-
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">New Password</label>
-
-                    <div class="col-sm-9">
-                        <input type="password" id="form-field-pass1">
+                    <label class="col-sm-3 control-label no-padding-right">暂住址</label>
+                    <div class="col-xs-12 col-sm-5">
+                    <@spring.formInput "userProfile.address" 'class="form-control" placeholder="请输入您暂时居住的地址"'/>
                     </div>
                 </div>
 
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">Confirm
-                        Password</label>
+                    <label class="col-sm-3 control-label no-padding-right">个人网站</label>
+                    <div class="col-xs-12 col-sm-5">
+                    <@spring.formInput "userProfile.webSite" 'class="form-control" placeholder="例:http://kangyonggan.com"'/>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">备注</label>
+                    <div class="col-xs-12 col-sm-5">
+                        <textarea rows="5" class="form-control" placeholder="个人备注信息">${userProfile.remarks}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div id="edit-password" class="tab-pane">
+                <div class="space-10"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">新密码<span class="red">*</span></label>
 
                     <div class="col-sm-9">
-                        <input type="password" id="form-field-pass2">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="密码:6至20位的字母数字组合" autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">确认密码<span class="red">*</span></label>
+
+                    <div class="col-sm-9">
+                        <input type="password" name="rePassword" class="form-control" placeholder="密码:6至20位的字母数字组合" autocomplete="off"/>
                     </div>
                 </div>
             </div>

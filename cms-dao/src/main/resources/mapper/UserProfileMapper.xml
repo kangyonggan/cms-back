@@ -15,12 +15,6 @@
         <result column="weixin" property="weixin" jdbcType="VARCHAR"/>
         <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
         <result column="web_site" property="webSite" jdbcType="VARCHAR"/>
-        <result column="country_code" property="countryCode" jdbcType="VARCHAR"/>
-        <result column="country_name" property="countryName" jdbcType="VARCHAR"/>
-        <result column="city_code" property="cityCode" jdbcType="VARCHAR"/>
-        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
-        <result column="district_code" property="districtCode" jdbcType="VARCHAR"/>
-        <result column="district_name" property="districtName" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>

@@ -73,20 +73,8 @@ CREATE TABLE user_profile
   COMMENT '身份证',
   web_site      VARCHAR(64)                           NOT NULL                    DEFAULT ''
   COMMENT '个人网站',
-  country_code  VARCHAR(16)                           NOT NULL                    DEFAULT '000'
-  COMMENT '国家代码',
-  country_name  VARCHAR(32)                           NOT NULL                    DEFAULT '中国'
-  COMMENT '国家名称',
-  city_code     VARCHAR(16)                           NOT NULL                    DEFAULT ''
-  COMMENT '城市代码',
-  city_name     VARCHAR(32)                           NOT NULL                    DEFAULT ''
-  COMMENT '城市名称',
-  district_code VARCHAR(16)                           NOT NULL                    DEFAULT ''
-  COMMENT '地区代码',
-  district_name VARCHAR(32)                           NOT NULL                    DEFAULT ''
-  COMMENT '地区名称',
   address       VARCHAR(128)                          NOT NULL                    DEFAULT ''
-  COMMENT '详细地址',
+  COMMENT '暂住址',
   remarks       VARCHAR(512)                          NOT NULL                    DEFAULT ''
   COMMENT '备注',
   is_deleted    TINYINT                               NOT NULL                    DEFAULT 0
@@ -333,3 +321,8 @@ INSERT INTO role_menu SELECT
                         code
                       FROM menu
                       WHERE code LIKE 'USER%' OR code = 'DASHBOARD';
+
+INSERT INTO dictionary
+(code, value, type, sort)
+VALUES
+  ('000', '中国', 'country', 0);
