@@ -1,9 +1,6 @@
 package com.kangyonggan.archetype.cms.web.controller.web;
 
-import com.kangyonggan.archetype.cms.biz.service.MenuService;
-import com.kangyonggan.archetype.cms.biz.service.RoleService;
-import com.kangyonggan.archetype.cms.biz.service.TokenService;
-import com.kangyonggan.archetype.cms.biz.service.UserService;
+import com.kangyonggan.archetype.cms.biz.service.*;
 import com.kangyonggan.archetype.cms.model.vo.Token;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,9 @@ public class ValidateController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private DictionaryService dictionaryService;
 
     @Autowired
     private TokenService tokenService;
@@ -119,6 +119,24 @@ public class ValidateController {
         }
 
         return !roleService.existsRoleCode(code);
+    }
+
+    /**
+     * 校验字典代码是否可用
+     *
+     * @param code
+     * @param oldCode
+     * @return
+     */
+    @RequestMapping(value = "dictionary", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean validateDictionaryCode(@RequestParam("code") String code,
+                                    @RequestParam(value = "oldCode", required = false, defaultValue = "") String oldCode) {
+        if (code.equals(oldCode)) {
+            return true;
+        }
+
+        return !dictionaryService.existsDictionaryCode(code);
     }
 
     /**
