@@ -207,6 +207,19 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         return userProfileMapper.selectOne(userProfile);
     }
 
+    @Override
+    @LogTime
+    @CacheDelete("user:id:{0:id}||user:all")
+    public void updateUserAndProfile(User user, UserProfile userProfile) {
+        if (StringUtils.isNotEmpty(user.getPassword())) {
+            entryptPassword(user);
+        }
+
+        super.updateByPrimaryKeySelective(user);
+
+        userProfileMapper.updateByPrimaryKeySelective(userProfile);
+    }
+
     /**
      * 保存用户基础信息
      *

@@ -34,6 +34,12 @@ public class DashboardUserController extends BaseController {
     @Autowired
     private DictionaryService dictionaryService;
 
+    @Autowired
+    private FileUpload fileUpload;
+
+    @Autowired
+    private Images images;
+
     /**
      * 基本信息
      *
@@ -60,18 +66,18 @@ public class DashboardUserController extends BaseController {
         Map<String, Object> resultMap = getResultMap();
         ShiroUser shiroUser = userService.getShiroUser();
 
-        if (!result.hasErrors()) {
+        if (!result.hasErrors() && !bindingResult.hasErrors()) {
             if (avatar != null && !avatar.isEmpty()) {
-                String fileName = FileUpload.upload(avatar);
-                String large = Images.large(fileName);
+                String fileName = fileUpload.upload(avatar);
+                String large = images.large(fileName);
                 userProfile.setLargeAvatar(large);
-                String middle = Images.middle(fileName);
+                String middle = images.middle(fileName);
                 userProfile.setMediumAvatar(middle);
-                String small = Images.small(fileName);
+                String small = images.small(fileName);
                 user.setSmallAvatar(small);
             }
 
-//            userService.updateUser(user);
+            userService.updateUserAndProfile(user, userProfile);
             resultMap.put("user", userService.findUserById(shiroUser.getId()));
             resultMap.put("userProfile", userService.findUserProfileByUsername(shiroUser.getUsername()));
         } else {

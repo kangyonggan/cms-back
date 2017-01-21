@@ -130,4 +130,12 @@ public interface UserService {
      * @return
      */
     UserProfile findUserProfileByUsername(String username);
+
+    /**
+     *  更新个人资料
+     *
+     * @param user
+     * @param userProfile
+     */
+    void updateUserAndProfile(User user, UserProfile userProfile);
 }

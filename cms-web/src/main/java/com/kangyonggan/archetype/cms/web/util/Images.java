@@ -16,25 +16,28 @@ import org.springframework.stereotype.Component;
 public class Images {
 
     @Autowired
-    private static Ftp ftp;
+    private Ftp ftp;
+
+    @Autowired
+    private FileUpload fileUpload;
 
     //大Logo
-    public static String large(String source) throws FileUploadException {
+    public String large(String source) throws FileUploadException {
         return thumbnails(source, "l", 200, 200);
     }
 
     //中Logo
-    public static String middle(String source) throws FileUploadException {
+    public String middle(String source) throws FileUploadException {
         return thumbnails(source, "m", 128, 128);
     }
 
     //小Logo
-    public static String small(String source) throws FileUploadException {
+    public String small(String source) throws FileUploadException {
         return thumbnails(source, "s", 64, 64);
     }
 
-    private static String thumbnails(String source, String suffix, int width, int height) throws FileUploadException {
-        String desc = FileUpload.extractFilePath(source, suffix);
+    private String thumbnails(String source, String suffix, int width, int height) throws FileUploadException {
+        String desc = fileUpload.extractFilePath(source, suffix);
 
         try {
             Thumbnails.of(PropertiesUtil.getProperties(AppConstants.FILE_PATH_ROOT) + source)

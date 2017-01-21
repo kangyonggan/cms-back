@@ -5,7 +5,7 @@ $(function () {
     var $btn = $("#submit");
 
     $("#remove").click(function () {
-        $("#avatar-div").empty().html('<input type="file" name="largeAvatar"/>');
+        $("#avatar-div").empty().html('<input type="file" name="avatar"/>');
 
         initAvatar();
         return false;
@@ -119,11 +119,17 @@ $(function () {
                 dataType: 'json',
                 success: function (response) {
                     if (response.errCode == 'success') {
-                        window.location.reload();
+                        Message.success("修改成功");
+                        var user = response.user;
+                        // 更新navbar和当前页
+                        if (user.smallAvatar != '') {
+                            $(".nav-user-photo").attr("src", ftpUrl + "/" + user.smallAvatar);
+                        }
+                        $("#navFullname").html(user.fullname);
                     } else {
                         Message.error(response.errMsg);
-                        $btn.button('reset');
                     }
+                    $btn.button('reset');
                 },
                 error: function () {
                     Message.error("服务器内部错误，请稍后再试。");

@@ -44,6 +44,7 @@
         <property name="cms.ftp.username" description="ftp服务器ip用户名" defaultValue="kyg"/>
         <property name="cms.ftp.password" description="ftp服务器ip密码" defaultValue="123456"/>
         <property name="cms.ftp.url" description="文件地址" defaultValue="http://kangyonggan.com:6789/"/>
+        <property name="cms.file.root.path" description="文件根目录" defaultValue="/Users/kyg/code2/cms/cms-web/src/main/webapp/WEB-INF/"/>
 
         <!-- log4j2 -->
         <property name="cms.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/cms"/>

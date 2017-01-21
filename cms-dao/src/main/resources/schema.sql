@@ -267,9 +267,9 @@ VALUES
 --  data for user_profile
 -- ----------------------------
 INSERT INTO user_profile
-(username, phone, id_card, web_site)
+(username, phone, id_card, qq, weixin, address, web_site)
 VALUES
-  ('admin', '021-63898580', '340321199112273095', 'http://kangyonggan.com');
+  ('admin', '021-63898580', '340321199112273095', '316071722', 'Brave_Kang', '上海市松江区九亭镇云润家园', 'http://kangyonggan.com');
 
 -- ----------------------------
 --  data for role

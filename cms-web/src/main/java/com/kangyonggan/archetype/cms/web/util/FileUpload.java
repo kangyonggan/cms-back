@@ -22,7 +22,7 @@ import java.io.IOException;
 public class FileUpload {
 
     @Autowired
-    private static Ftp ftp;
+    private Ftp ftp;
 
     /**
      * 上传文件
@@ -31,7 +31,7 @@ public class FileUpload {
      * @return
      * @throws Exception
      */
-    public static String upload(MultipartFile file) throws FileUploadException {
+    public String upload(MultipartFile file) throws FileUploadException {
         String fileName = "";
         if (file.getSize() != 0) {
             try {
@@ -54,7 +54,7 @@ public class FileUpload {
      * @return
      * @throws IOException
      */
-    public static File getAbsolutePath(String filename) throws IOException {
+    public File getAbsolutePath(String filename) throws IOException {
         File desc = new File(PropertiesUtil.getProperties(AppConstants.FILE_PATH_ROOT) + filename);
         if (!desc.getParentFile().exists()) {
             desc.getParentFile().mkdirs();
@@ -72,7 +72,7 @@ public class FileUpload {
      * @param suffix
      * @return
      */
-    public static String extractFilePath(String fileName, String suffix) {
+    public String extractFilePath(String fileName, String suffix) {
         String fileExt = FilenameUtils.getExtension(fileName);
         return extractFilePathByExtension(fileExt, suffix);
     }
@@ -83,7 +83,7 @@ public class FileUpload {
      * @param file
      * @return
      */
-    public static String extractFilePath(MultipartFile file) {
+    public String extractFilePath(MultipartFile file) {
         String fileExt = FilenameUtils.getExtension(file.getOriginalFilename());
         return extractFilePathByExtension(fileExt, "");
     }
@@ -95,7 +95,7 @@ public class FileUpload {
      * @param suffix
      * @return
      */
-    private static String extractFilePathByExtension(String extension, String suffix) {
+    private String extractFilePathByExtension(String extension, String suffix) {
         StringBuilder tempPath = new StringBuilder();
         tempPath.append(AppConstants.FILE_UPLOAD_PATH);
         tempPath.append(DateUtils.getCurrentFullDateTime());

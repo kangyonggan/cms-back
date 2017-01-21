@@ -1,9 +1,10 @@
 <#assign ctx="${(rca.contextPath)!''}">
+<@apps>
 
 <div class="space-10"></div>
 
 <form id="form" method="post" action="${ctx}/dashboard/user/profile" class="form-horizontal" enctype="multipart/form-data">
-    <input type="hidden" id="${user.id}"/>
+    <input type="hidden" name="id" value="${user.id}"/>
     <div class="tabbable">
         <ul class="nav nav-tabs padding-16">
             <li class="active">
@@ -34,7 +35,7 @@
                             <span class="ace-file-container hide-placeholder selected">
                                 <span class="ace-file-name large">
                                     <img class="middle"
-                                         src="http://kangyonggan.com:6789/upload/20170108160243947_l.png">
+                                         src="<#if userProfile.largeAvatar?has_content>${ftpUrl}/${userProfile.largeAvatar}<#else>${ctx}/static/ace/dist/avatars/profile-pic.jpg</#if>">
                                     <i class=" ace-icon fa fa-picture-o file-image"></i>
                                 </span>
                             </span>
@@ -176,7 +177,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">备注</label>
                     <div class="col-xs-12 col-sm-5">
-                        <textarea rows="5" class="form-control" placeholder="个人备注信息">${userProfile.remarks}</textarea>
+                        <textarea rows="5" class="form-control" name="remarks" placeholder="个人备注信息">${userProfile.remarks}</textarea>
                     </div>
                 </div>
             </div>
@@ -215,4 +216,8 @@
     </div>
 </form>
 
+<script>
+    var ftpUrl = '${ftpUrl}';
+</script>
 <script src="${ctx}/static/app/js/dashboard/user/profile.js"></script>
+</@apps>

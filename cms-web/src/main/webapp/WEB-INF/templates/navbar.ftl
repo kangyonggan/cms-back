@@ -31,7 +31,7 @@
                                          alt="${user.fullname}">
                                 </@apps>
                             <#else>
-                                <img class="nav-user-photo" src="${ctx}/static/ace/dist/avatars/user.jpg"
+                                <img class="nav-user-photo" src="${ctx}/static/ace/dist/avatars/profile-pic.jpg"
                                      alt="${user.fullname}">
                             </#if>
                             <span class="user-info">
