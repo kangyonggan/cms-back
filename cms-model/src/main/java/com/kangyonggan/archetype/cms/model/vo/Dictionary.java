@@ -6,6 +6,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 @Data
+@Table(name = "dictionary")
 public class Dictionary implements Serializable {
     /**
      * 主键, 自增

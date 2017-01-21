@@ -2,13 +2,12 @@ package com.kangyonggan.archetype.cms.model.vo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 
 @Data
-@Table(name = "menu")
-public class Menu implements Serializable {
+@Table(name = "content")
+public class Content implements Serializable {
     /**
      * 主键, 自增
      */
@@ -17,34 +16,14 @@ public class Menu implements Serializable {
     private Long id;
 
     /**
-     * 菜单代码
+     * 标题
      */
-    private String code;
+    private String title;
 
     /**
-     * 菜单名称
+     * 模板
      */
-    private String name;
-
-    /**
-     * 父菜单代码
-     */
-    private String pcode;
-
-    /**
-     * 菜单地址
-     */
-    private String url;
-
-    /**
-     * 菜单排序(从0开始)
-     */
-    private Integer sort;
-
-    /**
-     * 菜单图标的样式
-     */
-    private String icon;
+    private String template;
 
     /**
      * 逻辑删除:{0:未删除, 1:已删除}
@@ -65,16 +44,9 @@ public class Menu implements Serializable {
     private Date updatedTime;
 
     /**
-     * 子菜单
+     * 内容
      */
-    @Transient
-    private List<Menu> leaf;
-
-    /**
-     * 父菜单ID
-     */
-    @Transient
-    private Long pid;
+    private String body;
 
     private static final long serialVersionUID = 1L;
 }

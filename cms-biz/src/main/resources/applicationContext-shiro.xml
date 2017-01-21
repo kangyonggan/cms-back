@@ -82,6 +82,7 @@
                 /validate* = anon
                 /login* = anon
                 /reset* = anon
+                /content* = anon
             </value>
         </property>
     </bean>

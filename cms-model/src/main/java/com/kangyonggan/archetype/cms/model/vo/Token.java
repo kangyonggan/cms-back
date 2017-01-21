@@ -6,6 +6,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 @Data
+@Table(name = "token")
 public class Token implements Serializable {
     /**
      * 主键, 自增

@@ -227,6 +227,33 @@ CREATE INDEX type_ix
 CREATE INDEX sort_ix
   ON dictionary (sort);
 
+-- ----------------------------
+--  Table structure for content
+-- ----------------------------
+CREATE TABLE content
+(
+  id           BIGINT(20) PRIMARY KEY  AUTO_INCREMENT NOT NULL
+  COMMENT '主键, 自增',
+  title        VARCHAR(128)                           NOT NULL
+  COMMENT '标题',
+  template     VARCHAR(64)                            NOT NULL                DEFAULT 'page'
+  COMMENT '模板',
+  body         LONGTEXT                               NOT NULL
+  COMMENT '内容',
+  is_deleted   TINYINT                                NOT NULL                DEFAULT 0
+  COMMENT '逻辑删除:{0:未删除, 1:已删除}',
+  created_time TIMESTAMP                              NOT NULL                DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  updated_time TIMESTAMP                              NOT NULL                DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  COMMENT '更新时间'
+)
+  COMMENT '内容表';
+CREATE UNIQUE INDEX id_UNIQUE
+  ON content (id);
+
+-- ----------------------------
+--  Table structure for token
+-- ----------------------------
 CREATE TABLE token
 (
   id           BIGINT(20) PRIMARY KEY  AUTO_INCREMENT NOT NULL
@@ -251,6 +278,39 @@ CREATE UNIQUE INDEX id_UNIQUE
   ON token (id);
 CREATE UNIQUE INDEX code_UNIQUE
   ON token (code);
+
+-- ----------------------------
+--  Table structure for attachment
+-- ----------------------------
+DROP TABLE
+IF EXISTS attachment;
+
+CREATE TABLE attachment
+(
+  id              BIGINT(20) PRIMARY KEY AUTO_INCREMENT NOT NULL
+  COMMENT '主键, 自增',
+  source_id       BIGINT(20)                            NOT NULL                DEFAULT 0
+  COMMENT '来源ID',
+  name            VARCHAR(256)                          NOT NULL                DEFAULT ''
+  COMMENT '附件原名',
+  path            VARCHAR(256)                          NOT NULL
+  COMMENT '附件路径',
+  type            VARCHAR(32)                           NOT NULL
+  COMMENT '类型',
+  create_username VARCHAR(20)                           NOT NULL                DEFAULT ''
+  COMMENT '上传人',
+  is_deleted      TINYINT                               NOT NULL                DEFAULT 0
+  COMMENT '逻辑删除:{0:未删除, 1:已删除}',
+  created_time    TIMESTAMP                             NOT NULL                DEFAULT CURRENT_TIMESTAMP
+  COMMENT '创建时间',
+  updated_time    TIMESTAMP                             NOT NULL                DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  COMMENT '更新时间'
+)
+  COMMENT '附件表';
+CREATE UNIQUE INDEX id_UNIQUE
+  ON attachment (id);
+CREATE INDEX create_ix
+  ON attachment (created_time);
 
 #====================初始数据====================#
 
@@ -296,7 +356,7 @@ VALUES
   ('CONTENT', '内容', 'DASHBOARD', 'content', 2, 'menu-icon fa fa-gavel'),
   ('CONTENT_CACHE', '缓存管理', 'CONTENT', 'content/cache', 0, ''),
   ('CONTENT_DICTIONARY', '数据字典', 'CONTENT', 'content/dictionary', 1, ''),
-  ('CONTENT_PAGE', '页面管理', 'CONTENT', 'content/page', 2, ''),
+  ('CONTENT_CONTENT', '内容管理', 'CONTENT', 'content/content', 2, ''),
 
   ('USER', '我的', 'DASHBOARD', 'user', 3, 'menu-icon fa fa-user'),
   ('USER_PROFILE', '个人资料', 'USER', 'user/profile', 0, '');
