@@ -3,7 +3,8 @@
 
 <div class="space-10"></div>
 
-<form id="form" method="post" action="${ctx}/dashboard/user/profile" class="form-horizontal" enctype="multipart/form-data">
+<form id="form" method="post" action="${ctx}/dashboard/user/profile" class="form-horizontal"
+      enctype="multipart/form-data">
     <input type="hidden" name="id" value="${user.id}"/>
     <div class="tabbable">
         <ul class="nav nav-tabs padding-16">
@@ -28,9 +29,6 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-4" id="avatar-div">
-                    <#if userProfile.largeAvatar==''>
-                        <input type="file" name="avatar"/>
-                    <#else>
                         <label class="ace-file-input ace-file-multiple">
                             <span class="ace-file-container hide-placeholder selected">
                                 <span class="ace-file-name large">
@@ -43,7 +41,6 @@
                                 <i class=" ace-icon fa fa-times"></i>
                             </a>
                         </label>
-                    </#if>
                     </div>
 
                     <div class="vspace-12-sm"></div>
@@ -89,13 +86,15 @@
 
                             <div class="col-sm-8">
                                 <label class="inline">
-                                    <input name="sex" value="0" type="radio" class="ace" <#if userProfile.sex==0>checked</#if>>
+                                    <input name="sex" value="0" type="radio" class="ace"
+                                           <#if userProfile.sex==0>checked</#if>>
                                     <span class="lbl middle"> 男</span>
                                 </label>
 
                                 &nbsp; &nbsp; &nbsp;
                                 <label class="inline">
-                                    <input name="sex" value="1" type="radio" class="ace"<#if userProfile.sex==1>checked</#if>>
+                                    <input name="sex" value="1" type="radio" class="ace"
+                                           <#if userProfile.sex==1>checked</#if>>
                                     <span class="lbl middle"> 女</span>
                                 </label>
                             </div>
@@ -110,7 +109,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">手机号</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "user.mobile" 'class="form-control" placeholder="请输入11位的手机号"'/>
+                        <@spring.formInput "user.mobile" 'class="form-control" placeholder="请输入11位的手机号"'/>
                         <input type="hidden" id="old-mobile" value="${user.mobile!''}"/>
                     </div>
                 </div>
@@ -120,7 +119,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">座机号</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "userProfile.phone" 'class="form-control" placeholder="请输入座机号"'/>
+                        <@spring.formInput "userProfile.phone" 'class="form-control" placeholder="请输入座机号"'/>
                     </div>
                 </div>
 
@@ -129,7 +128,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">邮箱</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "user.email" 'class="form-control" placeholder="请输入邮箱，可以用来找回密码"'/>
+                        <@spring.formInput "user.email" 'class="form-control" placeholder="请输入邮箱，可以用来找回密码"'/>
                         <input type="hidden" id="old-email" value="${user.email!''}"/>
                     </div>
                 </div>
@@ -139,7 +138,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">QQ号</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "userProfile.qq" 'class="form-control" placeholder="请输入QQ账号"'/>
+                        <@spring.formInput "userProfile.qq" 'class="form-control" placeholder="请输入QQ账号"'/>
                     </div>
                 </div>
 
@@ -148,7 +147,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">微信号</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "userProfile.weixin" 'class="form-control" placeholder="请输入微信账号"'/>
+                        <@spring.formInput "userProfile.weixin" 'class="form-control" placeholder="请输入微信账号"'/>
                     </div>
                 </div>
 
@@ -159,7 +158,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">暂住址</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "userProfile.address" 'class="form-control" placeholder="请输入您暂时居住的地址"'/>
+                        <@spring.formInput "userProfile.address" 'class="form-control" placeholder="请输入您暂时居住的地址"'/>
                     </div>
                 </div>
 
@@ -168,7 +167,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">个人网站</label>
                     <div class="col-xs-12 col-sm-5">
-                    <@spring.formInput "userProfile.webSite" 'class="form-control" placeholder="例:http://kangyonggan.com"'/>
+                        <@spring.formInput "userProfile.webSite" 'class="form-control" placeholder="例:http://kangyonggan.com"'/>
                     </div>
                 </div>
 
@@ -177,7 +176,8 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right">备注</label>
                     <div class="col-xs-12 col-sm-5">
-                        <textarea rows="5" class="form-control" name="remarks" placeholder="个人备注信息">${userProfile.remarks}</textarea>
+                        <textarea rows="5" class="form-control" name="remarks"
+                                  placeholder="个人备注信息">${userProfile.remarks}</textarea>
                     </div>
                 </div>
             </div>
@@ -189,7 +189,8 @@
                     <label class="col-sm-3 control-label no-padding-right">新密码<span class="red">*</span></label>
 
                     <div class="col-sm-9">
-                        <input type="password" id="password" name="password" class="form-control" placeholder="密码:6至20位的字母数字组合" autocomplete="off"/>
+                        <input type="password" id="password" name="password" class="form-control"
+                               placeholder="密码:6至20位的字母数字组合" autocomplete="off"/>
                     </div>
                 </div>
 
@@ -199,7 +200,8 @@
                     <label class="col-sm-3 control-label no-padding-right">确认密码<span class="red">*</span></label>
 
                     <div class="col-sm-9">
-                        <input type="password" name="rePassword" class="form-control" placeholder="密码:6至20位的字母数字组合" autocomplete="off"/>
+                        <input type="password" name="rePassword" class="form-control" placeholder="密码:6至20位的字母数字组合"
+                               autocomplete="off"/>
                     </div>
                 </div>
             </div>
@@ -210,7 +212,7 @@
         <div class="col-xs-offset-3">
             <button id="submit" class="btn btn-inverse" data-loading-text="正在提交...">
                 <i class="ace-icon fa fa-check"></i>
-            <@spring.message "app.button.save"/>
+                <@spring.message "app.button.save"/>
             </button>
         </div>
     </div>

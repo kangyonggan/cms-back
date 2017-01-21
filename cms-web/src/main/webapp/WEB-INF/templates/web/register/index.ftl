@@ -66,7 +66,7 @@
                         <input type="checkbox" name="agree" class="ace">
                         <span class="lbl">
                             我已阅读并同意
-                            <a href="javascript:">《注册协议》</a>
+                            <a href="${ctx}/#content/1" target="_blank">《注册协议》</a>
                         </span>
                     </label>
 
