@@ -2,7 +2,7 @@
 
 <div class="space-10"></div>
 
-<form id="form" action="${ctx}/dashboard/user/profile" class="form-horizontal" enctype="multipart/form-data">
+<form id="form" method="post" action="${ctx}/dashboard/user/profile" class="form-horizontal" enctype="multipart/form-data">
     <input type="hidden" id="${user.id}"/>
     <div class="tabbable">
         <ul class="nav nav-tabs padding-16">
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4" id="avatar-div">
                     <#if userProfile.largeAvatar==''>
-                        <input type="file" name="largeAvatar"/>
+                        <input type="file" name="avatar"/>
                     <#else>
                         <label class="ace-file-input ace-file-multiple">
                             <span class="ace-file-container hide-placeholder selected">
@@ -53,7 +53,7 @@
 
                             <div class="col-sm-8">
                                 <input class="col-xs-12 col-sm-10 readonly" readonly type="text"
-                                       value="${user.username}">
+                                       value="${user.username}" name="username">
                             </div>
                         </div>
 
@@ -88,13 +88,13 @@
 
                             <div class="col-sm-8">
                                 <label class="inline">
-                                    <input name="sex" type="radio" class="ace" <#if userProfile.sex==0>checked</#if>>
+                                    <input name="sex" value="0" type="radio" class="ace" <#if userProfile.sex==0>checked</#if>>
                                     <span class="lbl middle"> 男</span>
                                 </label>
 
                                 &nbsp; &nbsp; &nbsp;
                                 <label class="inline">
-                                    <input name="sex" type="radio" class="ace"<#if userProfile.sex==1>checked</#if>>
+                                    <input name="sex" value="1" type="radio" class="ace"<#if userProfile.sex==1>checked</#if>>
                                     <span class="lbl middle"> 女</span>
                                 </label>
                             </div>

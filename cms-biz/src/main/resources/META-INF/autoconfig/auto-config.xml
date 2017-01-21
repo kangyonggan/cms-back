@@ -37,6 +37,14 @@
         <property name="cms.mail.password" description="邮件服务器密码" defaultValue="123456"/>
         <property name="cms.mail.timeout" description="邮件发送超时时间" defaultValue="25000"/>
 
+        <!--ftp-->
+        <property name="cms.ftp.path" description="上传路径" defaultValue="upload/"/>
+        <property name="cms.ftp.ip" description="ftp服务器ip" defaultValue="127.0.0.1"/>
+        <property name="cms.ftp.port" description="ftp服务器端口" defaultValue="21"/>
+        <property name="cms.ftp.username" description="ftp服务器ip用户名" defaultValue="kyg"/>
+        <property name="cms.ftp.password" description="ftp服务器ip密码" defaultValue="123456"/>
+        <property name="cms.ftp.url" description="文件地址" defaultValue="http://kangyonggan.com:6789/"/>
+
         <!-- log4j2 -->
         <property name="cms.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/cms"/>
 
@@ -52,6 +60,7 @@
         <generate template="applicationContext-redis.xml" charset="UTF-8"/>
         <generate template="applicationContext-provider.xml" charset="UTF-8"/>
         <generate template="applicationContext-mail.xml" charset="UTF-8"/>
+        <generate template="applicationContext-ftp.xml" charset="UTF-8"/>
         <generate template="log4j2.xml"/>
     </script>
 </config>

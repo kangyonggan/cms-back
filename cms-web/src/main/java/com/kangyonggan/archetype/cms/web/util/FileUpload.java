@@ -1,11 +1,14 @@
 package com.kangyonggan.archetype.cms.web.util;
 
 import com.kangyonggan.archetype.cms.biz.util.DateUtils;
+import com.kangyonggan.archetype.cms.biz.util.Ftp;
 import com.kangyonggan.archetype.cms.biz.util.PropertiesUtil;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -15,7 +18,11 @@ import java.io.IOException;
  * @author kangyonggan
  * @since 2016/12/6
  */
+@Component
 public class FileUpload {
+
+    @Autowired
+    private static Ftp ftp;
 
     /**
      * 上传文件
@@ -32,7 +39,7 @@ public class FileUpload {
                 File desc = getAbsolutePath(fileName);
                 file.transferTo(desc);
 
-                FtpUtil.upload(fileName);
+                ftp.upload(fileName);
             } catch (Exception e) {
                 throw new FileUploadException("文件上传异常", e);
             }

@@ -142,6 +142,10 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -169,7 +173,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <antx.path>${user.home}/antx.properties</antx.path>
+                <antx.path>D:\data\config\antx.properties</antx.path>
             </properties>
         </profile>
         <profile>

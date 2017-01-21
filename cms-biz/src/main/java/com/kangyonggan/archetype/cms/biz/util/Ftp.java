@@ -1,7 +1,7 @@
-package com.kangyonggan.archetype.cms.web.util;
+package com.kangyonggan.archetype.cms.biz.util;
 
-import com.kangyonggan.archetype.cms.biz.util.PropertiesUtil;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -14,13 +14,22 @@ import java.io.FileInputStream;
  * @since 2017/1/4
  */
 @Log4j2
-public class FtpUtil {
+public class Ftp {
 
-    private static String path = PropertiesUtil.getProperties("ftp.path");
-    private static String ip = PropertiesUtil.getProperties("ftp.ip");
-    private static int port = Integer.parseInt(PropertiesUtil.getProperties("ftp.port"));
-    private static String username = PropertiesUtil.getProperties("ftp.username");
-    private static String password = PropertiesUtil.getProperties("ftp.password");
+    @Setter
+    private String path;
+
+    @Setter
+    private String ip;
+
+    @Setter
+    private int port;
+
+    @Setter
+    private String username;
+
+    @Setter
+    private String password;
 
     /**
      * 登录ftp服务器
@@ -28,7 +37,7 @@ public class FtpUtil {
      * @return
      * @throws Exception
      */
-    private static FTPClient connect() throws Exception {
+    private FTPClient connect() throws Exception {
         FTPClient ftp = new FTPClient();
         int reply;
         ftp.connect(ip, port);
@@ -51,7 +60,7 @@ public class FtpUtil {
      * @param name
      * @return 返回在文件服务器的相对路径
      */
-    public static String upload(String name) {
+    public String upload(String name) {
         FTPClient ftp = null;
         FileInputStream in = null;
         try {
@@ -78,5 +87,4 @@ public class FtpUtil {
         }
         return "";
     }
-
 }

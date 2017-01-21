@@ -1,15 +1,22 @@
 package com.kangyonggan.archetype.cms.web.util;
 
+import com.kangyonggan.archetype.cms.biz.util.Ftp;
 import com.kangyonggan.archetype.cms.biz.util.PropertiesUtil;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.fileupload.FileUploadException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author kangyonggan
  * @since 2016/12/6
  */
+@Component
 public class Images {
+
+    @Autowired
+    private static Ftp ftp;
 
     //大Logo
     public static String large(String source) throws FileUploadException {
@@ -35,7 +42,7 @@ public class Images {
                     .keepAspectRatio(false)
                     .toFile(PropertiesUtil.getProperties(AppConstants.FILE_PATH_ROOT) + desc);
 
-            FtpUtil.upload(desc);
+            ftp.upload(desc);
         } catch (Exception e) {
             throw new FileUploadException("文件转换异常", e);
         }
