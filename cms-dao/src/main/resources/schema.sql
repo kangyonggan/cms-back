@@ -385,7 +385,9 @@ INSERT INTO role_menu SELECT
 INSERT INTO dictionary
 (code, value, type, sort)
 VALUES
-  ('000', '中国', 'country', 0);
+  ('cms', '内容管理系统', 'system', 0),
+  ('page', '页面', 'template', 0),
+  ('content', '内容', 'attachment', 0);
 
 INSERT INTO content (id, title, template, body)
 VALUES (1, '注册协议', 'page', '## 一、总则

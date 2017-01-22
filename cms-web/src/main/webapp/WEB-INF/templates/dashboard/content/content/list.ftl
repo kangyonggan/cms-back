@@ -18,7 +18,7 @@
         <select name="template" class="form-control">
             <option value="">全部模板</option>
         <#list templates as t>
-            <option value="${t.getTemplate()}" <#if template=='${t.getTemplate()}'>selected</#if>>${t.getName()}</option>
+            <option value="${t.code}" <#if template=='${t.code}'>selected</#if>>${t.value}</option>
         </#list>
         </select>
     </div>

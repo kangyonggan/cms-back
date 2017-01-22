@@ -3,7 +3,6 @@ package com.kangyonggan.archetype.cms.web.controller.web;
 import com.kangyonggan.archetype.cms.biz.service.AttachmentService;
 import com.kangyonggan.archetype.cms.biz.service.ContentService;
 import com.kangyonggan.archetype.cms.biz.util.MarkdownUtil;
-import com.kangyonggan.archetype.cms.model.constants.AttachmentType;
 import com.kangyonggan.archetype.cms.model.vo.Attachment;
 import com.kangyonggan.archetype.cms.model.vo.Content;
 import com.kangyonggan.archetype.cms.web.controller.BaseController;
@@ -41,7 +40,7 @@ public class ContentController extends BaseController {
     public String detail(@PathVariable("id") Long id, Model model) {
         Content content = contentService.findContentById(id);
         content.setBody(MarkdownUtil.markdownToHtml(content.getBody()));
-        List<Attachment> attachments = attachmentService.findAttachmentsBySourceIdAndType(id, AttachmentType.CONTENT.name());
+        List<Attachment> attachments = attachmentService.findAttachmentsBySourceIdAndType(id, "content");
 
         model.addAttribute("content", content);
         model.addAttribute("attachments", attachments);

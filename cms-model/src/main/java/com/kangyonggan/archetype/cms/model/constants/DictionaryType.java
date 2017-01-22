@@ -10,9 +10,9 @@ import lombok.Getter;
  */
 public enum DictionaryType {
 
-    COUNTRY("country", "国家"),
-    CITY("city", "城市"),
-    DISTRICT("district", "地区");
+    SYSTEM("system", "系统"),
+    TEMPLATE("template", "模板"),
+    ATTACHMENT("attachment", "附件");
 
     /**
      * 类型

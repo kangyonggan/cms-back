@@ -16,7 +16,7 @@
         <div class="col-xs-12 col-sm-5">
             <select name="template" class="form-control">
                 <#list templates as t>
-                    <option value="${t.getTemplate()}" <#if content.id?? && content.template==t.getTemplate()>selected</#if>>${t.getName()}</option>
+                    <option value="${t.code}" <#if content.id?? && content.template==t.code>selected</#if>>${t.value}</option>
                 </#list>
             </select>
         </div>

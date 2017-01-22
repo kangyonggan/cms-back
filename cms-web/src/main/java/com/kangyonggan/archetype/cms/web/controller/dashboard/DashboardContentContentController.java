@@ -2,13 +2,10 @@ package com.kangyonggan.archetype.cms.web.controller.dashboard;
 
 import com.github.pagehelper.PageInfo;
 import com.kangyonggan.archetype.cms.biz.service.ContentService;
+import com.kangyonggan.archetype.cms.biz.service.DictionaryService;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
-import com.kangyonggan.archetype.cms.model.constants.AttachmentType;
-import com.kangyonggan.archetype.cms.model.constants.ContentTemplate;
-import com.kangyonggan.archetype.cms.model.vo.Attachment;
-import com.kangyonggan.archetype.cms.model.vo.Content;
-import com.kangyonggan.archetype.cms.model.vo.ShiroUser;
-import com.kangyonggan.archetype.cms.model.vo.User;
+import com.kangyonggan.archetype.cms.model.constants.DictionaryType;
+import com.kangyonggan.archetype.cms.model.vo.*;
 import com.kangyonggan.archetype.cms.web.controller.BaseController;
 import com.kangyonggan.archetype.cms.web.util.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
@@ -40,6 +37,9 @@ public class DashboardContentContentController extends BaseController {
     private UserService userService;
 
     @Autowired
+    private DictionaryService dictionaryService;
+
+    @Autowired
     private FileUpload fileUpload;
 
     /**
@@ -59,9 +59,10 @@ public class DashboardContentContentController extends BaseController {
                        Model model) {
         List<Content> contents = contentService.searchContents(pageNum, template, title);
         PageInfo<Content> page = new PageInfo(contents);
+        List<Dictionary> templates = dictionaryService.findDictionariesByType(DictionaryType.TEMPLATE.getType());
 
         model.addAttribute("page", page);
-        model.addAttribute("templates", ContentTemplate.values());
+        model.addAttribute("templates", templates);
         return getPathList();
     }
 
@@ -75,7 +76,7 @@ public class DashboardContentContentController extends BaseController {
     @RequiresPermissions("CONTENT_CONTENT")
     public String create(Model model) {
         model.addAttribute("content", new Content());
-        model.addAttribute("templates", ContentTemplate.values());
+        model.addAttribute("templates", dictionaryService.findDictionariesByType(DictionaryType.TEMPLATE.getType()));
         return getPathForm();
     }
 
@@ -120,7 +121,7 @@ public class DashboardContentContentController extends BaseController {
     @RequiresPermissions("CONTENT_CONTENT")
     public String edit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("content", contentService.findContentById(id));
-        model.addAttribute("templates", ContentTemplate.values());
+        model.addAttribute("templates", dictionaryService.findDictionariesByType(DictionaryType.TEMPLATE.getType()));
         return getPathForm();
     }
 
@@ -191,7 +192,7 @@ public class DashboardContentContentController extends BaseController {
             attachment.setPath(path);
             attachment.setCreateUsername(user.getUsername());
             attachment.setName(file.getOriginalFilename());
-            attachment.setType(AttachmentType.CONTENT.name());
+            attachment.setType("content");
 
             files.add(attachment);
         }

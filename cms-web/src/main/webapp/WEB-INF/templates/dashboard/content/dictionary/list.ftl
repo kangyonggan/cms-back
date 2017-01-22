@@ -39,8 +39,8 @@
 <table id="dictionary-table" class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
-        <th>字典代码</th>
         <th>类型</th>
+        <th>代码</th>
         <th>名称</th>
         <th>排序</th>
         <th>逻辑删除</th>

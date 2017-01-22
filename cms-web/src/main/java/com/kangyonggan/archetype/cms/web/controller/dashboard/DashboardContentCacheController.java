@@ -1,7 +1,9 @@
 package com.kangyonggan.archetype.cms.web.controller.dashboard;
 
+import com.kangyonggan.archetype.cms.biz.service.DictionaryService;
 import com.kangyonggan.archetype.cms.biz.service.RedisService;
-import com.kangyonggan.archetype.cms.model.constants.System;
+import com.kangyonggan.archetype.cms.model.constants.DictionaryType;
+import com.kangyonggan.archetype.cms.model.vo.Dictionary;
 import com.kangyonggan.archetype.cms.web.controller.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,6 +28,9 @@ public class DashboardContentCacheController extends BaseController {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private DictionaryService dictionaryService;
+
     /**
      * 缓存管理
      *
@@ -41,9 +46,10 @@ public class DashboardContentCacheController extends BaseController {
         if (StringUtils.isNotEmpty(system)) {
             keys = redisService.getKeys(system + "*");
         }
+        List<Dictionary> systems = dictionaryService.findDictionariesByType(DictionaryType.SYSTEM.getType());
 
         model.addAttribute("keys", keys);
-        model.addAttribute("systems", System.values());
+        model.addAttribute("systems", systems);
         return getPathList();
     }
 

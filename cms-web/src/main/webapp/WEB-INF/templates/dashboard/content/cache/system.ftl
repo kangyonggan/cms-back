@@ -1,5 +1,5 @@
 <#list systems as sys>
     <#if sys.code==system>
-        ${sys.getName()}
+        ${sys.value}
     </#if>
 </#list>

@@ -16,7 +16,7 @@
     <div class="form-group">
         <select name="system" class="form-control" style="min-width: 150px;">
         <#list systems as sys>
-            <option value="${sys.getCode()}" <#if system=='${sys.getCode()}'>selected</#if>>${sys.getName()}</option>
+            <option value="${sys.code}" <#if system=='${sys.code}'>selected</#if>>${sys.value}</option>
         </#list>
         </select>
     </div>

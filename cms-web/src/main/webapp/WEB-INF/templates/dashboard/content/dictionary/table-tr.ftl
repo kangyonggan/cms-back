@@ -1,8 +1,8 @@
 <#assign ctx="${(rca.contextPath)!''}">
 
 <tr id="dictionary-${dictionary.code}">
-    <td>${dictionary.code}</td>
     <td><#include "type.ftl"></td>
+    <td>${dictionary.code}</td>
     <td>${dictionary.value}</td>
     <td>${dictionary.sort}</td>
     <td><#include "delete.ftl"></td>

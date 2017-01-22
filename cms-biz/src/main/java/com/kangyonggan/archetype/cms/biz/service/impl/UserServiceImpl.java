@@ -213,6 +213,8 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     public void updateUserAndProfile(User user, UserProfile userProfile) {
         if (StringUtils.isNotEmpty(user.getPassword())) {
             entryptPassword(user);
+        } else {
+            user.setPassword(null);
         }
 
         super.updateByPrimaryKeySelective(user);

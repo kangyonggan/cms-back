@@ -1,5 +1,5 @@
 <#list templates as t>
-    <#if t.template==content.template>
-    ${t.getName()}
+    <#if t.code==content.template>
+    ${t.value}
     </#if>
 </#list>

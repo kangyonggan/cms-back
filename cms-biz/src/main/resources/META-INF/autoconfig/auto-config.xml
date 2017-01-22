@@ -24,6 +24,7 @@
         <property name="cms.redis.host" description="redis主机ip" defaultValue="127.0.0.1"/>
         <property name="cms.redis.port" description="redis主机端口" defaultValue="6379"/>
         <property name="cms.redis.password" description="redis密码" defaultValue="123456"/>
+        <property name="cms.redis.prefix" description="redis的key的前缀" defaultValue="cms"/>
 
         <!--jdbc-->
         <property name="cms.jdbc.driver" description="jdbc驱动" defaultValue="com.mysql.jdbc.Driver"/>
