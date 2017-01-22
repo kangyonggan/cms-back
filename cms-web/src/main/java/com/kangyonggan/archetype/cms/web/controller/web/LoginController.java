@@ -160,7 +160,9 @@ public class LoginController extends BaseController {
 
         log.info("找回密码的邮箱：{}", email);
         log.info("找回密码的验证码：{}", captcha);
-        String realCaptcha = (String) request.getSession().getAttribute(AppConstants.KEY_CAPTCHA);
+
+        HttpSession session = request.getSession();
+        String realCaptcha = (String) session.getAttribute(AppConstants.KEY_CAPTCHA);
         log.info("session中的验证码：{}", realCaptcha);
 
         if (!captcha.equalsIgnoreCase(realCaptcha)) {
@@ -179,6 +181,8 @@ public class LoginController extends BaseController {
         mailService.sendResetMail(user, IPUtil.getServerHost(request));
         resultMap.put("errMsg", "/#reset-result");
 
+        // 清除验证码
+        session.removeAttribute(AppConstants.KEY_CAPTCHA);
         return resultMap;
     }
 
