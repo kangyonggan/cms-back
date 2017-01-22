@@ -26,4 +26,13 @@ public interface AttachmentService {
      * @return
      */
     List<Attachment> findAttachmentsBySourceIdAndType(Long sourceId, String type);
+
+    /**
+     * 删除附件
+     *
+     * @param id
+     * @param sourceId
+     * @param type
+     */
+    void deleteAttachment(Long id, Long sourceId, String type);
 }

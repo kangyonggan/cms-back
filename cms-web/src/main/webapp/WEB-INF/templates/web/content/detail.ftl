@@ -4,16 +4,10 @@
 
 <div class="col-xs-10 col-xs-offset-1">
     <div class="widget-box transparent">
-        <div class="widget-header widget-header-large">
-            <h3 class="widget-title grey lighter">
-                <i class="ace-icon fa fa-leaf green"></i>
-            ${content.title}
-            </h3>
-
-            <div class="widget-toolbar invoice-info">
-                <span class="blue"><@c.relative_date datetime=content.createdTime/></span>
-            </div>
-        </div>
+        <h3 class="widget-title grey lighter center">
+            <i class="ace-icon fa fa-leaf dark"></i>
+        ${content.title}
+        </h3>
 
         <div class="space-10"></div>
 
@@ -29,7 +23,7 @@
 
         <div class="space-10"></div>
 
-        <div class="hr hr-18 dotted"></div>
+        <div class="hr-double hr-18 dotted"></div>
 
         <h4>附件:</h4>
 

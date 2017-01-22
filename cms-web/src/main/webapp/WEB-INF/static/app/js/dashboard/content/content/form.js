@@ -35,6 +35,26 @@ $(function () {
             });
         });
 
+    $(".remove-old").click(function () {
+        var $trigger = $(this);
+        var url = $trigger.data('url');
+        var title = $trigger.attr("title");
+
+        $.messager.confirm("提示", "确定" + title + "吗?", function () {
+            $.get(url).success(function () {
+                $trigger.parents(".attachment-parent").remove();
+
+                if ($(".old-attachments-list").children().length == 0) {
+                    $(".old-attachments").remove();
+                }
+
+                Message.success("删除成功！")
+            }).error(function () {
+                Message.error("网络错误，请稍后重试");
+            })
+        });
+    });
+
     var $form = $('#content-form');
     var $btn = $("#submit");
 

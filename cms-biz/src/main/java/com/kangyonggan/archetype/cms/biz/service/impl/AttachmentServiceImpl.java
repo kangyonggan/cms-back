@@ -3,9 +3,11 @@ package com.kangyonggan.archetype.cms.biz.service.impl;
 import com.kangyonggan.archetype.cms.biz.service.AttachmentService;
 import com.kangyonggan.archetype.cms.mapper.AttachmentMapper;
 import com.kangyonggan.archetype.cms.model.annotation.LogTime;
+import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import com.kangyonggan.archetype.cms.model.vo.Attachment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -31,7 +33,20 @@ public class AttachmentServiceImpl extends BaseService<Attachment> implements At
         Attachment attachment = new Attachment();
         attachment.setSourceId(sourceId);
         attachment.setType(type);
+        attachment.setIsDeleted(AppConstants.IS_DELETED_NO);
 
         return super.select(attachment);
+    }
+
+    @Override
+    @LogTime
+    public void deleteAttachment(Long id, Long sourceId, String type) {
+        Attachment attachment = new Attachment();
+        attachment.setIsDeleted(AppConstants.IS_DELETED_YES);
+
+        Example example = new Example(Attachment.class);
+        example.createCriteria().andEqualTo("id", id).andEqualTo("sourceId", sourceId).andEqualTo("type", type);
+
+        attachmentMapper.updateByExampleSelective(attachment, example);
     }
 }

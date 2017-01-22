@@ -1,6 +1,7 @@
 package com.kangyonggan.archetype.cms.web.controller.dashboard;
 
 import com.github.pagehelper.PageInfo;
+import com.kangyonggan.archetype.cms.biz.service.AttachmentService;
 import com.kangyonggan.archetype.cms.biz.service.ContentService;
 import com.kangyonggan.archetype.cms.biz.service.DictionaryService;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
@@ -38,6 +39,9 @@ public class DashboardContentContentController extends BaseController {
 
     @Autowired
     private DictionaryService dictionaryService;
+
+    @Autowired
+    private AttachmentService attachmentService;
 
     @Autowired
     private FileUpload fileUpload;
@@ -121,6 +125,7 @@ public class DashboardContentContentController extends BaseController {
     @RequiresPermissions("CONTENT_CONTENT")
     public String edit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("content", contentService.findContentById(id));
+        model.addAttribute("attachments", attachmentService.findAttachmentsBySourceIdAndType(id, "content"));
         model.addAttribute("templates", dictionaryService.findDictionariesByType(DictionaryType.TEMPLATE.getType()));
         return getPathForm();
     }
@@ -138,7 +143,7 @@ public class DashboardContentContentController extends BaseController {
     @RequiresPermissions("CONTENT_CONTENT")
     @ResponseBody
     public Map<String, Object> update(@RequestParam(value = "attachment[]", required = false) List<MultipartFile> attachments,
-                                    @ModelAttribute("content") @Valid Content content, BindingResult result) throws Exception {
+                                      @ModelAttribute("content") @Valid Content content, BindingResult result) throws Exception {
         Map<String, Object> resultMap = getResultMap();
 
         if (!result.hasErrors()) {
@@ -166,6 +171,21 @@ public class DashboardContentContentController extends BaseController {
     @RequiresPermissions("CONTENT_CONTENT")
     public Map<String, Object> delete(@PathVariable("id") Long id) {
         contentService.deleteContent(id);
+        return getResultMap();
+    }
+
+    /**
+     * 删除附件
+     *
+     * @param id
+     * @param aid
+     * @return
+     */
+    @RequestMapping(value = "{id:[\\d]+}/attachment/{aid:[\\d]}/delete", method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresPermissions("CONTENT_CONTENT")
+    public Map<String, Object> deleteAttachment(@PathVariable("id") Long id, @PathVariable("aid") Long aid) {
+        attachmentService.deleteAttachment(aid, id, "content");
         return getResultMap();
     }
 

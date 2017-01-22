@@ -7,17 +7,18 @@
 <form id="content-form" method="post" enctype="multipart/form-data" class="form-horizontal"
       action="${ctx}/dashboard/content/content/${content.id???string('update', 'save')}">
 
-    <#if content.id??>
-        <input type="hidden" name="id" value="${content.id}"/>
-    </#if>
+<#if content.id??>
+    <input type="hidden" name="id" value="${content.id}"/>
+</#if>
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right">模板<span class="red">*</span></label>
         <div class="col-xs-12 col-sm-5">
             <select name="template" class="form-control">
-                <#list templates as t>
-                    <option value="${t.code}" <#if content.id?? && content.template==t.code>selected</#if>>${t.value}</option>
-                </#list>
+            <#list templates as t>
+                <option value="${t.code}"
+                        <#if content.id?? && content.template==t.code>selected</#if>>${t.value}</option>
+            </#list>
             </select>
         </div>
     </div>
@@ -25,7 +26,7 @@
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right">标题<span class="red">*</span></label>
         <div class="col-xs-12 col-sm-5">
-            <@spring.formInput "content.title" 'class="form-control" placeholder="简单描述一下内容,最多128字"'/>
+        <@spring.formInput "content.title" 'class="form-control" placeholder="简单描述一下内容,最多128字"'/>
         </div>
     </div>
 
@@ -39,15 +40,25 @@
 
     <div class="hr hr-18 dotted"></div>
 
+<#if content.id?? && attachments?size gt 0>
+    <div class="form-group old-attachments">
+        <label class="col-xs-10 col-xs-offset-1 pull-left">原附件</label>
+
+        <div class="col-xs-10 col-xs-offset-1 old-attachments-list">
+            <@apps>
+                <#list attachments as attachment>
+                <#include "attachment.ftl"/>
+            </#list>
+                </@apps>
+        </div>
+    </div>
+</#if>
+
     <div class="form-group">
-        <label class="col-xs-10 col-xs-offset-1 pull-left">附件</label>
+        <label class="col-xs-10 col-xs-offset-1 pull-left"><#if content.id?? && attachments?size gt 0>新</#if>附件</label>
 
         <div class="col-xs-10 col-xs-offset-1">
             <div id="form-attachments">
-                <#if content.id??>
-                    <div class="center">编辑时不允许修改原有的附件，但可以添加新的附件</div>
-                    <div class="space-10"></div>
-                </#if>
                 <input type="file" name="attachment[]"/>
             </div>
         </div>

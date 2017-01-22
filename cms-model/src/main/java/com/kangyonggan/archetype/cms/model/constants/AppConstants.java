@@ -12,6 +12,7 @@ public interface AppConstants {
      * 是否删除
      */
     byte IS_DELETED_NO = 0;
+    byte IS_DELETED_YES = 1;
 
     /**
      * 文件根目录的name
