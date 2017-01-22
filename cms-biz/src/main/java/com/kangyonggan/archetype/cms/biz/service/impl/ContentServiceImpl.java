@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.kangyonggan.archetype.cms.biz.service.AttachmentService;
 import com.kangyonggan.archetype.cms.biz.service.ContentService;
 import com.kangyonggan.archetype.cms.biz.util.StringUtil;
+import com.kangyonggan.archetype.cms.model.annotation.CacheDelete;
+import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
 import com.kangyonggan.archetype.cms.model.annotation.LogTime;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import com.kangyonggan.archetype.cms.model.vo.Attachment;
@@ -55,12 +57,14 @@ public class ContentServiceImpl extends BaseService<Content> implements ContentS
 
     @Override
     @LogTime
+    @CacheGetOrSave("content:id:{0}")
     public Content findContentById(Long id) {
         return super.selectByPrimaryKey(id);
     }
 
     @Override
     @LogTime
+    @CacheDelete("content:id:{0:id}")
     public void updateContentWithAttachments(Content content, List<Attachment> attachments) {
         super.updateByPrimaryKeySelective(content);
 
@@ -71,6 +75,7 @@ public class ContentServiceImpl extends BaseService<Content> implements ContentS
 
     @Override
     @LogTime
+    @CacheDelete("content:id:{0}")
     public void deleteContent(Long id) {
         super.deleteByPrimaryKey(id);
     }

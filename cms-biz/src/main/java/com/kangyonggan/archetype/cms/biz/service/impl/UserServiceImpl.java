@@ -122,7 +122,6 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Override
     @LogTime
-    @CacheDeleteAll("user:all")
     public void saveUserWithDefaultRole(User user) {
         entryptPassword(user);
         super.insertSelective(user);
@@ -174,7 +173,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Override
     @LogTime
-    @CacheDelete("user:id:{0:id}||user:all")
+    @CacheDelete("user:id:{0:id}")
     public void updateUser(User user) {
         super.updateByPrimaryKeySelective(user);
     }
@@ -209,7 +208,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Override
     @LogTime
-    @CacheDelete("user:id:{0:id}||user:all")
+    @CacheDelete("user:id:{0:id}")
     public void updateUserAndProfile(User user, UserProfile userProfile) {
         if (StringUtils.isNotEmpty(user.getPassword())) {
             entryptPassword(user);

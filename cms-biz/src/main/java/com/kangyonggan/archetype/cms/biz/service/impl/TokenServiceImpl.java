@@ -3,6 +3,7 @@ package com.kangyonggan.archetype.cms.biz.service.impl;
 import com.kangyonggan.archetype.cms.biz.service.TokenService;
 import com.kangyonggan.archetype.cms.biz.util.Digests;
 import com.kangyonggan.archetype.cms.biz.util.Encodes;
+import com.kangyonggan.archetype.cms.model.annotation.LogTime;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import com.kangyonggan.archetype.cms.model.vo.Token;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Date;
 public class TokenServiceImpl extends BaseService<Token> implements TokenService {
 
     @Override
+    @LogTime
     public String saveToken(String type, Long userId) {
         Token token = new Token();
         token.setType(type);
@@ -31,6 +33,7 @@ public class TokenServiceImpl extends BaseService<Token> implements TokenService
     }
 
     @Override
+    @LogTime
     public Token findTokenByCode(String code) {
         Token token = new Token();
         token.setCode(code);
@@ -39,6 +42,7 @@ public class TokenServiceImpl extends BaseService<Token> implements TokenService
     }
 
     @Override
+    @LogTime
     public void updateToken(Token token) {
         super.updateByPrimaryKeySelective(token);
     }

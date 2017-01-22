@@ -2,6 +2,9 @@ package com.kangyonggan.archetype.cms.biz.service.impl;
 
 import com.kangyonggan.archetype.cms.biz.service.AttachmentService;
 import com.kangyonggan.archetype.cms.mapper.AttachmentMapper;
+import com.kangyonggan.archetype.cms.model.annotation.CacheDelete;
+import com.kangyonggan.archetype.cms.model.annotation.CacheDeleteAll;
+import com.kangyonggan.archetype.cms.model.annotation.CacheGetOrSave;
 import com.kangyonggan.archetype.cms.model.annotation.LogTime;
 import com.kangyonggan.archetype.cms.model.constants.AppConstants;
 import com.kangyonggan.archetype.cms.model.vo.Attachment;
@@ -23,12 +26,14 @@ public class AttachmentServiceImpl extends BaseService<Attachment> implements At
 
     @Override
     @LogTime
+    @CacheDeleteAll("attachment:source:{0}")
     public void saveAttachments(Long sourceId, List<Attachment> attachments) {
         attachmentMapper.insertAttachments(sourceId, attachments);
     }
 
     @Override
     @LogTime
+    @CacheGetOrSave("attachment:source:{0}:type:{1}")
     public List<Attachment> findAttachmentsBySourceIdAndType(Long sourceId, String type) {
         Attachment attachment = new Attachment();
         attachment.setSourceId(sourceId);
@@ -40,6 +45,7 @@ public class AttachmentServiceImpl extends BaseService<Attachment> implements At
 
     @Override
     @LogTime
+    @CacheDelete("attachment:source:{1}:type:{2}")
     public void deleteAttachment(Long id, Long sourceId, String type) {
         Attachment attachment = new Attachment();
         attachment.setIsDeleted(AppConstants.IS_DELETED_YES);

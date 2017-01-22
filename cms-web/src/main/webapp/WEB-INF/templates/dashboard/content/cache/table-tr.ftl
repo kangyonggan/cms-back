@@ -14,7 +14,7 @@
             <ul class="dropdown-menu dropdown-menu-right dropdown-inverse">
                 <li>
                     <a href="javascript:" data-url="${ctx}/dashboard/content/cache/${key}/clear"
-                       data-role="clear-cache" title="清空${key}">清空</a>
+                       data-role="clear-cache" title="清空${key}">清除</a>
                 </li>
             </ul>
         </div>
