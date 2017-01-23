@@ -32,10 +32,6 @@
         </RollingRandomAccessFile>
         <SMTP name="Mail" subject="${cms.app.name} - 报警通知" to="${cms.mail.receiver}" from="${cms.mail.username}"
               smtpHost="${cms.mail.host}" smtpUsername="${cms.mail.username}" smtpPassword="${cms.mail.password}" bufferSize="${cms.mail.bufferSize}" >
-            <Filters>
-                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
-                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
-            </Filters>
         </SMTP>
         <Async name="AsyncAll">
             <AppenderRef ref="AllFile"/>
