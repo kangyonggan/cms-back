@@ -1,7 +1,6 @@
 package com.kangyonggan.archetype.cms.biz.aop;
 
 
-import com.kangyonggan.archetype.cms.biz.service.DictionaryService;
 import com.kangyonggan.archetype.cms.biz.service.RedisService;
 import com.kangyonggan.archetype.cms.biz.util.PropertiesUtil;
 import com.kangyonggan.archetype.cms.biz.util.StringUtil;
@@ -34,9 +33,6 @@ public class CacheAop {
 
     @Autowired
     private RedisService redisService;
-
-    @Autowired
-    private DictionaryService dictionaryService;
 
     /**
      * redis键的前缀
