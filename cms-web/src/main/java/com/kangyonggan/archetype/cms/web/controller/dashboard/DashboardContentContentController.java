@@ -6,7 +6,10 @@ import com.kangyonggan.archetype.cms.biz.service.ContentService;
 import com.kangyonggan.archetype.cms.biz.service.DictionaryService;
 import com.kangyonggan.archetype.cms.biz.service.UserService;
 import com.kangyonggan.archetype.cms.model.constants.DictionaryType;
-import com.kangyonggan.archetype.cms.model.vo.*;
+import com.kangyonggan.archetype.cms.model.vo.Attachment;
+import com.kangyonggan.archetype.cms.model.vo.Content;
+import com.kangyonggan.archetype.cms.model.vo.Dictionary;
+import com.kangyonggan.archetype.cms.model.vo.ShiroUser;
 import com.kangyonggan.archetype.cms.web.controller.BaseController;
 import com.kangyonggan.archetype.cms.web.util.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
@@ -42,9 +45,6 @@ public class DashboardContentContentController extends BaseController {
 
     @Autowired
     private AttachmentService attachmentService;
-
-    @Autowired
-    private FileUpload fileUpload;
 
     /**
      * 列表界面
@@ -206,7 +206,7 @@ public class DashboardContentContentController extends BaseController {
                 continue;
             }
 
-            String path = fileUpload.upload(file);
+            String path = FileUpload.upload(file);
 
             Attachment attachment = new Attachment();
             attachment.setPath(path);

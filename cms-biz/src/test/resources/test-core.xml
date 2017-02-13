@@ -22,6 +22,4 @@
     <import resource="applicationContext-freemarker.xml"/>
     <!--邮件-->
     <import resource="applicationContext-mail.xml"/>
-    <!--ftp-->
-    <import resource="applicationContext-ftp.xml"/>
 </beans>
